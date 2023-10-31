@@ -12,7 +12,7 @@ Go into the site folder, run these 2 commands in different terminal instances
 python manage.py runserver <port>
 ```
 ```python
-python manage.py tailwind start <port>
+python manage.py tailwind start
 ```
 
 Both should be running on the same port, can also omit the port for the default 8000.
