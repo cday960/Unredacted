@@ -2,8 +2,13 @@
 
 ## Install
 Create the python virtual env and install packages
-```python
+```bash
 python -m venv .venv && source .venv/bin/activate && pip install -r requirements.txt
+```
+
+Install tailwind
+```bash
+python manage.py tailwind install
 ```
 
 ## Start server
@@ -11,7 +16,7 @@ Go into the site folder, run these 2 commands in different terminal instances
 ```python
 python manage.py runserver <port>
 ```
-```python
+```bash
 python manage.py tailwind start
 ```
 
