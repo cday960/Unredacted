@@ -1,21 +1,7 @@
-{% extends "theme/base.html" %}
-{% block main %}
+{% extends "theme/page.html" %}
+{% block header_title %} {{title}} {% endblock %}
+{% block page_content %}
 
-<head>
-  <title>Dashboard</title>
-</head>
-
-<div class="grid-rows-2">
-  <div class="row-start-1 py-4 px-4">
-    <h1 id="replace-me">{{ test }}</h1>
-  </div>
-  <div class="row-start-2 px-4">
-    <!-- This div makes a GET request to the route /dashboard with the trigger "click" and swaps the outerHTML of the target h1 element -->
-    <div class="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded w-24" id="replace_button" hx-get="/dashboard"
-      hx-trigger="click" hx-target="#replace-me" hx-swap="outerHTML">
-      <p class="px-2 py-2">Press me!</p>
-    </div>
-  </div>
-</div>
+<h1>{{ test }}</h1>
 
 {% endblock %}
