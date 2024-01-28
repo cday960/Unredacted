@@ -1,7 +1,12 @@
-{% extends "theme/page_navbar.html" %}
+{% extends "theme/base_page.html" %}
+{% block nav_bar %} 
+    {% include "theme/navbar.html" %}
+{% endblock %}
 {% block header_title %} {{title}} {% endblock %}
 {% block page_content %}
 
 <h1>{{ test }}</h1>
+
+{% include "theme/list.html" %}
 
 {% endblock %}
