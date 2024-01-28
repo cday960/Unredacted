@@ -29,11 +29,17 @@ def index(request: HtmxHttpRequest) -> HttpResponse:
     print(request.htmx.trigger)
     if request.htmx.trigger == "home_page_button":
         context = {"test": "Home Page Switch", "title": "Home"}
-        return render(request, "dashboard/index.html", context)
+        return render(request, "home_page.html", context)
     elif request.htmx.trigger == "search_page_button":
         context = {"test": "Search Page Switch", "title": "Search"}
-        return render(request, "dashboard/index.html", context)
+        return render(request, "search_page.html", context)
+    elif request.htmx.trigger == "document_search_button":
+        context = {"test": "document search", "title": "Document Page"}
+        return render(request, "search_results.html", context)
+    elif request.htmx.trigger == "document_page_button":
+        context = {"test": "document search", "title": "Document Page"}
+        return render(request, "document_page.html", context)
     else:
         # landing page
-        context = {"test": "Initial landing", "title": "Home"}
-        return render(request, "dashboard/index.html", context)
+        context = {"test": "Initial landing", "title": "Welcome to Unredacted"}
+        return render(request, "landing_page.html", context)
