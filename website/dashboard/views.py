@@ -42,6 +42,7 @@ def index(request: HtmxHttpRequest) -> HttpResponse:
         context = previous_context = {"test": "document search results", "title": "Document Search Results Page"}
         new_render = previous_render = "search_results.html"
     elif request.htmx.trigger == "document_page_button":
+        # uses back button, so do not set previous context/render
         context = {"test": "document search", "title": "Document Page"}
         new_render = "document_page.html"
     elif request.htmx.trigger == "back_button":
