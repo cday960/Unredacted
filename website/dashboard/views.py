@@ -34,7 +34,7 @@ def index(request: HtmxHttpRequest) -> HttpResponse:
         context = {"test": "Search Page Switch", "title": "Search"}
         return render(request, "search_page.html", context)
     elif request.htmx.trigger == "document_search_button":
-        context = {"test": "document search", "title": "Document Page"}
+        context = {"test": "document search results", "title": "Document Search Results Page"}
         return render(request, "search_results.html", context)
     elif request.htmx.trigger == "document_page_button":
         context = {"test": "document search", "title": "Document Page"}
