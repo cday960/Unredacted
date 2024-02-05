@@ -1,5 +1,8 @@
 # Unredacted
 
+## Python Version
+Use Python 3.11.2
+
 ## Install
 Create the python virtual env and install packages
 ```bash
