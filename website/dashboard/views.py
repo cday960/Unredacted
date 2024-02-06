@@ -65,7 +65,7 @@ def search_index(request: HtmxHttpRequest) -> HttpResponse:
         search_query: str = request.POST.get('search_query')
         # process the request through the API
         # search_results: dict[str, list[str: str]] = api.get_search_results(search_query)
-        search_results: list[dict[str, str]] = [{"id": "001", "name": "name_doc_1", "details": "test doc 1 details", "original_date": "01/01/2001", "release_date": "01/12/2024"}]
+        search_results: list[dict[str, str]] = [{"id": "001", "name": "name_doc_1", "details": "test doc 1 details", "original_date": "01/01/2001", "posted_date": "01/12/2024"}]
         context = previous_context = {"test": "document search results", "title": "Document Search Results Page", "search_results": search_results, "search_query": search_query}
         new_render = previous_render = "search_results.html"
     return render(request, new_render, context) 
