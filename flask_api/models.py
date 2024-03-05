@@ -1,0 +1,48 @@
+import json
+from typing import Dict, List, Optional
+
+
+class Document:
+    def __init__(
+        self,
+        title: str = "",
+        id: int = 0,
+        uuid: int = 0,
+        filename: str = "",
+        doc_type: str = "",
+        digitalObjects: Optional[List[Dict[str, str]]] = None,
+    ):
+        self.title = title
+        self.id = id
+        self.uuid = uuid
+        self.filename = filename
+        self.doc_type = doc_type
+        self.digitalObjects = digitalObjects if digitalObjects is not None else []
+
+    # debugging func to see info ab document
+    def __repr__(self) -> str:
+        return f"doc {self.title}: {self.uuid}"
+
+    # printing function, this function overloads print(<Document>)
+    def __str__(self) -> str:
+        result = (
+            f"{self.title}\n\tID: {self.id}\n\tUUID: {self.uuid}\n\t"
+            f"Filename: {self.filename}\n\tDoc type: {self.doc_type}\n\t"
+            f"Number of objects: {len(self.digitalObjects)}"
+        )
+        return result
+
+    # converts obj to dict
+    def to_dict(self) -> Dict:
+        return {
+            "title": self.title,
+            "id": self.id,
+            "uuid": self.uuid,
+            "filename": self.filename,
+            "doc_type": self.doc_type,
+            "digitalObjects": self.digitalObjects,
+        }
+
+    def to_json(self):
+        return json.dumps(self.__dict__)
+        # return json.dumps(self, default=lambda o: o.__dict__, sort_keys=True, indent=4)
