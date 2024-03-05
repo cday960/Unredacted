@@ -16,6 +16,7 @@ class FlaskAppWrapper:
         """
         self.app = app
         self.configs(**configs)
+        self.route = self.app.route
 
     def configs(self, **configs):
         for config, value in configs:

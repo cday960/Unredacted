@@ -2,7 +2,7 @@ import os
 import requests
 import json
 
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify
 from dotenv import load_dotenv
 
 from app_factory import FlaskAppWrapper
@@ -18,7 +18,11 @@ flask_app = Flask(__name__)
 app = FlaskAppWrapper(flask_app)
 
 
-def webapp_search(search_parameters: str):
+@app.route(
+    "/webapp/search/<string:search_parameters>/<int:result_limit>", methods=["GET"]
+)
+@app.route("/webapp/search/<string:search_parameters>", methods=["GET"])
+def webapp_search(search_parameters: str, result_limit: int = 20):
     """
     127.0.0.1:5000/webapp/search/<search_parameters>
     Example: 127.0.0.1:5000/webapp/search/john+f+kennedy
@@ -26,19 +30,21 @@ def webapp_search(search_parameters: str):
     """
     doc_list = []
 
-    url = api_url + "records/search?q=" + search_parameters
+    url = f"{api_url}records/search?q={search_parameters}&limit={result_limit}"
 
     headers = {"Content-Type": "application/json", "x-api-key": api_key}
 
     json_response = json.loads(requests.get(url, headers=headers).text)
 
     for result in json_response["body"]["hits"]["hits"]:
+        print(json.dumps(json_response, indent=2))
         title = result["_source"]["record"]["title"]
-        id = result["_id"]
+        id = result["_source"]["metadata"]["controlGroup"]["naId"]
         uuid = result["_source"]["metadata"]["uuid"]
         filename = result["_source"]["metadata"]["fileName"]
         doc_type = result["_type"]
-        doc = Document(title, id, uuid, filename, doc_type)
+        date = result["_source"]["metadata"]["ingestTime"]
+        doc = Document(title, id, uuid, filename, doc_type, date)
 
         # Some records have no digitalObjects
         try:
@@ -47,11 +53,16 @@ def webapp_search(search_parameters: str):
                     "filename": obj.get("objectFilename"),
                     "url": obj.get("objectUrl"),
                     "type": obj.get("objectType"),
+                    "description": obj.get("objectDescription"),
                 }
-                for obj in result["_source"]["record"]["digitalObjects"]
+                # limiting to five to make data a little easier to sift through
+                for obj in result["_source"]["record"]["digitalObjects"][0:5]
             ]
         except KeyError:
-            print(f"ERROR: the document has no digital objects (uuid: {uuid})")
+            print(
+                f"ERROR: the document has no digital objects"
+                f"(uuid: {uuid}, filetype: {filename[-3:]})"
+            )
             doc.digitalObjects = []
 
         doc_list.append(doc.to_dict())
@@ -59,9 +70,8 @@ def webapp_search(search_parameters: str):
     return jsonify({"data": doc_list})
 
 
-app.add_endpoint(
-    "/webapp/search/<string:search_parameters>", "webapp_search", webapp_search
-)
+# @app.route("/webapp/records/<string:uuid>", methods=["GET"])
+# def webapp_search(uuid: str = ""):
 
 
 if __name__ == "__main__":

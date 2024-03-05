@@ -1,5 +1,6 @@
 import json
-from typing import Dict, List, Optional
+from typing import Dict, List, Optional, Any
+import datetime
 
 
 class Document:
@@ -10,6 +11,7 @@ class Document:
         uuid: int = 0,
         filename: str = "",
         doc_type: str = "",
+        date: datetime.datetime = datetime.datetime.now(),
         digitalObjects: Optional[List[Dict[str, str]]] = None,
     ):
         self.title = title
@@ -17,6 +19,7 @@ class Document:
         self.uuid = uuid
         self.filename = filename
         self.doc_type = doc_type
+        self.date = date
         self.digitalObjects = digitalObjects if digitalObjects is not None else []
 
     # debugging func to see info ab document
@@ -25,24 +28,25 @@ class Document:
 
     # printing function, this function overloads print(<Document>)
     def __str__(self) -> str:
-        result = (
+        return (
             f"{self.title}\n\tID: {self.id}\n\tUUID: {self.uuid}\n\t"
             f"Filename: {self.filename}\n\tDoc type: {self.doc_type}\n\t"
             f"Number of objects: {len(self.digitalObjects)}"
         )
-        return result
 
     # converts obj to dict
-    def to_dict(self) -> Dict:
+    def to_dict(
+        self,
+    ) -> Dict[str, str | int | datetime.datetime | Optional[List[Dict[str, str]]]]:
         return {
             "title": self.title,
             "id": self.id,
             "uuid": self.uuid,
             "filename": self.filename,
             "doc_type": self.doc_type,
+            "date": self.date,
             "digitalObjects": self.digitalObjects,
         }
 
-    def to_json(self):
+    def to_json(self) -> str:
         return json.dumps(self.__dict__)
-        # return json.dumps(self, default=lambda o: o.__dict__, sort_keys=True, indent=4)
