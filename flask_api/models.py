@@ -15,16 +15,14 @@ class Document:
     def __init__(
         self,
         title: str = "",
-        id: int = 0,
-        uuid: int = 0,
+        naId: int = 0,
         filename: str = "",
         doc_type: str = "",
         date: datetime.datetime = datetime.datetime.now(),
         digitalObjects: Optional[List[Dict[str, str]]] = None,
     ):
         self.title = title
-        self.id = id
-        self.uuid = uuid
+        self.naId = naId
         self.filename = filename
         self.doc_type = doc_type
         self.date = date
@@ -32,12 +30,12 @@ class Document:
 
     # debugging func to see info ab document
     def __repr__(self) -> str:
-        return f"doc {self.title}: {self.uuid}"
+        return f"doc {self.title}: {self.naId}"
 
     # printing function, this function overloads print(<Document>)
     def __str__(self) -> str:
         return (
-            f"{self.title}\n\tID: {self.id}\n\tUUID: {self.uuid}\n\t"
+            f"{self.title}\n\tID: {self.naId}\n\t"
             f"Filename: {self.filename}\n\tDoc type: {self.doc_type}\n\t"
             f"Number of objects: {len(self.digitalObjects)}"
         )
@@ -48,8 +46,7 @@ class Document:
     ) -> Dict[str, str | int | datetime.datetime | Optional[List[Dict[str, str]]]]:
         return {
             "title": self.title,
-            "id": self.id,
-            "uuid": self.uuid,
+            "naId": self.naId,
             "filename": self.filename,
             "doc_type": self.doc_type,
             "date": self.date,

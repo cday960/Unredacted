@@ -13,6 +13,7 @@ load_dotenv()
 
 api_url = "https://catalog.archives.gov/api/v2/"
 api_key = str(os.getenv("API_KEY"))
+headers = {"Content-Type": "application/json", "x-api-key": api_key}
 
 flask_app = Flask(__name__)
 app = FlaskAppWrapper(flask_app)
@@ -32,20 +33,17 @@ def webapp_search(search_parameters: str, result_limit: int = 20):
 
     url = f"{api_url}records/search?q={search_parameters}&limit={result_limit}"
 
-    headers = {"Content-Type": "application/json", "x-api-key": api_key}
-
     json_response = json.loads(requests.get(url, headers=headers).text)
 
     for result in json_response["body"]["hits"]["hits"]:
         # print(json.dumps(json_response, indent=2))
 
         title = result["_source"]["record"]["title"]
-        id = result["_source"]["metadata"]["controlGroup"]["naId"]
-        uuid = result["_source"]["metadata"]["uuid"]
+        naId = result["_source"]["metadata"]["controlGroup"]["naId"]
         filename = result["_source"]["metadata"]["fileName"]
         doc_type = result["_type"]
         date = result["_source"]["metadata"]["ingestTime"]
-        doc = Document(title, id, uuid, filename, doc_type, date)
+        doc = Document(title, naId, filename, doc_type, date)
 
         # Some records have no digitalObjects
         try:
@@ -62,7 +60,7 @@ def webapp_search(search_parameters: str, result_limit: int = 20):
         except KeyError:
             print(
                 f"ERROR: the document has no digital objects"
-                f"(uuid: {uuid}, filetype: {filename[-3:]})"
+                f"(naId: {naId}, filetype: {filename[-3:]})"
             )
             doc.digitalObjects = []
 
@@ -71,8 +69,17 @@ def webapp_search(search_parameters: str, result_limit: int = 20):
     return jsonify({"data": doc_list})
 
 
-# @app.route("/webapp/records/<string:uuid>", methods=["GET"])
-# def webapp_search(uuid: str = ""):
+@app.route("/webapp/records/<string:naId>", methods=["GET"])
+def webapp_records(naId: str):
+    if naId == "" or None:
+        return jsonify({"error": "invalid naId given"}), 400
+
+    url = f"{api_url}records/search?naId={naId}"
+
+    json_response = json.loads(requests.get(url, headers=headers).text)
+    print(json.dumps(json_response, indent=2))
+
+    return jsonify({"data": "temp"})
 
 
 if __name__ == "__main__":
