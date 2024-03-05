@@ -37,7 +37,8 @@ def webapp_search(search_parameters: str, result_limit: int = 20):
     json_response = json.loads(requests.get(url, headers=headers).text)
 
     for result in json_response["body"]["hits"]["hits"]:
-        print(json.dumps(json_response, indent=2))
+        # print(json.dumps(json_response, indent=2))
+
         title = result["_source"]["record"]["title"]
         id = result["_source"]["metadata"]["controlGroup"]["naId"]
         uuid = result["_source"]["metadata"]["uuid"]

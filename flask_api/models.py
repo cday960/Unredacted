@@ -1,6 +1,14 @@
 import json
 from typing import Dict, List, Optional, Any
 import datetime
+from json import JSONEncoder
+
+
+class Encoder(JSONEncoder):
+    def default(self, obj):
+        if isinstance(obj, datetime.datetime):
+            return obj.isoformat()
+        return JSONEncoder.default(self, obj)
 
 
 class Document:
@@ -49,4 +57,4 @@ class Document:
         }
 
     def to_json(self) -> str:
-        return json.dumps(self.__dict__)
+        return json.dumps(self.to_dict(), cls=Encoder)
