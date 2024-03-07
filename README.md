@@ -1,29 +1,17 @@
-# Unredacted
+# Unredacted Capstone Project
 
-## Python Version
-Use Python 3.11.2
+## Group Members
+- Luke Schaefer
+- Cam Day
+- Landon Vowels
+- Ryan Sellers
 
-## Install
-Create the python virtual env and install packages
+## Quickstart
 ```bash
-python3 -m venv .venv 
-source .venv/bin/activate 
-pip install -r requirements.txt
+docker-compose up --build
 ```
 
-Install tailwind
-```bash
-cd website
-python3 manage.py tailwind install
-```
+### Notes
+Please refer to the docs folder for more information
 
-## Start server
-Go into the site folder, run these 2 commands in different terminal instances
-```bash
-python3 manage.py runserver <port>
-```
-```bash
-python3 manage.py tailwind start
-```
 
-Both should be running on the same port, can also omit the port for the default 8000.
