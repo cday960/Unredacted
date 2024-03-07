@@ -1,0 +1,24 @@
+{% load static tailwind_tags %}
+{% load django_browser_reload %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Django Tailwind</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  {% tailwind_css %}
+  {% load static %}
+  <script src="{% static 'js/htmx.min.js' %}" defer></script>
+</head>
+
+<body hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
+  <main id="main">
+    {% block main %}{% endblock %}
+  </main>
+  {% django_browser_reload_script %}
+</body>
+
+</html>

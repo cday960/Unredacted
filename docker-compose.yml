@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  django_app:
+    build: ./django_app
+    volumes:
+      - ./django_app:/app
+    ports:
+      - "8000:8000"
+
+  flask_api:
+    build: ./flask_api
+    volumes:
+      - ./flask_api:/app
+    ports:
+      - "5000:5000"
