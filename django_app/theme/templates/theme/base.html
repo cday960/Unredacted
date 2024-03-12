@@ -12,6 +12,8 @@
   {% tailwind_css %}
   {% load static %}
   <script src="{% static 'js/htmx.min.js' %}" defer></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 </head>
 
 <body hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
