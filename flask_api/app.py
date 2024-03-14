@@ -126,7 +126,6 @@ def webapp_records(naId: str, uuid: str = ""):
 
     try:
         for x in json_response["_source"]["record"]["digitalObjects"]:
-            print(x)
             doc.digitalObjects.append(
                 {
                     "filename": x.get("objectFilename"),

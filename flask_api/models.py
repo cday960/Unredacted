@@ -15,7 +15,7 @@ class Document:
     def __init__(
         self,
         title: str = "",
-        naId: Tuple[int, int] = (0, 0),
+        naId: int = 0,
         uuid: str = "",
         # sort: Optional[Tuple[float, str]] = None,
         filename: str = "",
