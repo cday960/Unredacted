@@ -1,21 +1,23 @@
 import json
-from typing import Dict, List, Optional, Any
+from typing import Dict, List, Optional, Any, Tuple
 import datetime
 from json import JSONEncoder
 
 
 class Encoder(JSONEncoder):
-    def default(self, obj):
-        if isinstance(obj, datetime.datetime):
-            return obj.isoformat()
-        return JSONEncoder.default(self, obj)
+    def default(self, o):
+        if isinstance(o, datetime.datetime):
+            return o.isoformat()
+        return JSONEncoder.default(self, o)
 
 
 class Document:
     def __init__(
         self,
         title: str = "",
-        naId: int = 0,
+        naId: Tuple[int, int] = (0, 0),
+        uuid: str = "",
+        # sort: Optional[Tuple[float, str]] = None,
         filename: str = "",
         doc_type: str = "",
         date: datetime.datetime = datetime.datetime.now(),
@@ -23,6 +25,8 @@ class Document:
     ):
         self.title = title
         self.naId = naId
+        self.uuid = uuid
+        # self.sort = sort
         self.filename = filename
         self.doc_type = doc_type
         self.date = date
@@ -41,17 +45,27 @@ class Document:
         )
 
     # converts obj to dict
-    def to_dict(
-        self,
-    ) -> Dict[str, str | int | datetime.datetime | Optional[List[Dict[str, str]]]]:
-        return {
+    # def to_dict(
+    #     self,
+    # ) -> Dict[
+    #     str,
+    #     Tuple[int, int]
+    #     | Optional[Tuple[float, str]]
+    #     | int
+    #     | datetime.datetime
+    #     | Optional[List[Dict[str, str]]],
+    # ]:
+    def to_dict(self):
+        ret = {
             "title": self.title,
-            "naId": self.naId,
+            "id": self.naId,
+            "uuid": self.uuid,
             "filename": self.filename,
             "doc_type": self.doc_type,
             "date": self.date,
             "digitalObjects": self.digitalObjects,
         }
+        return ret
 
     def to_json(self) -> str:
         return json.dumps(self.to_dict(), cls=Encoder)
