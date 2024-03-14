@@ -1,0 +1,30 @@
+{% extends "theme/base_page.html" %}
+{% block header_title %} {{title}} {% endblock %}
+{% block page_content %}
+
+<h1>{{ test }}</h1>
+
+<p>Searching for {{ data.search_query }}</p>
+<ul role="list" class="divide-y divide-gray-100">
+    {% for result in data.search_results %}
+    <li class="flex justify-between gap-x-6 py-5">
+        <div class="flex min-w-0 gap-x-4">
+        <div class="min-w-0 flex-auto">
+            <p class="text-sm font-semibold leading-6 text-gray-900">{{ result.title }}</p>
+        </div>
+        </div>
+        <div class="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
+        <p class="texta-sm leading-6 text-gray-900">Original Date: {{ result.date }}</p>
+        </div>
+        <div class="bg-indigo-600 py-3 px-5 text-white font-semibold rounded-lg hover:shadow-lg transition duration-3000 cursor-pointer">
+            <a href="#" 
+            id="document_page_button" 
+            hx-get="{% url 'display_doc_index' result.naId result.title %}"
+            hx-trigger="click" 
+            hx-target="#replace-me" 
+            hx-swap="outerHTML">See Document</a></div>
+    </li>
+    {% endfor %}
+</ul>
+
+{% endblock %}

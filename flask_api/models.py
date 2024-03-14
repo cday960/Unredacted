@@ -1,5 +1,5 @@
 import json
-from typing import Dict, List, Optional, Any, Tuple
+from typing import Dict, List, Optional, Any, Union
 import datetime
 from json import JSONEncoder
 
@@ -45,21 +45,12 @@ class Document:
         )
 
     # converts obj to dict
-    # def to_dict(
-    #     self,
-    # ) -> Dict[
-    #     str,
-    #     Tuple[int, int]
-    #     | Optional[Tuple[float, str]]
-    #     | int
-    #     | datetime.datetime
-    #     | Optional[List[Dict[str, str]]],
-    # ]:
-    def to_dict(self):
-        ret = {
+    def to_dict(
+        self,
+    ) -> Dict[str, Union[str, int, datetime.datetime, Optional[List[Dict[str, str]]]]]:
+        return {
             "title": self.title,
-            "id": self.naId,
-            "uuid": self.uuid,
+            "naId": self.naId,
             "filename": self.filename,
             "doc_type": self.doc_type,
             "date": self.date,
