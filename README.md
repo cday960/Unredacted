@@ -2,7 +2,7 @@
 
 ## Group Members
 - Luke Schaefer
-- Cam Day
+- Cameron Day
 - Landon Vowels
 - Ryan Sellers
 
