@@ -19,7 +19,7 @@
         <div class="bg-indigo-600 py-3 px-5 text-white font-semibold rounded-lg hover:shadow-lg transition duration-3000 cursor-pointer">
             <a href="#" 
             id="document_page_button" 
-            hx-get="{% url 'display_doc_index' result.naId result.title %}"
+            hx-get="{% url 'display_doc_index' result.naId %}"
             hx-trigger="click" 
             hx-target="#replace-me" 
             hx-swap="outerHTML">See Document</a></div>
