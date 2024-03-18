@@ -63,6 +63,7 @@ def get_docs_from_json_response(
                             url=obj.get("objectUrl"),
                             type=obj.get("objectType"),
                             description=obj.get("objectDescription"),
+                            # summary would be none
                         )
                     )
                 else:
@@ -70,7 +71,7 @@ def get_docs_from_json_response(
             doc_list.append(doc)
         except KeyError:
             print(
-                f"ERROR: the document has no digital objects"
+                f"ERROR: the document has either no digital objects or non-pdf digital objects"
                 f"(naId: {doc.naId}, filetype: {doc.filename[-3:]})"
             )
     return doc_list

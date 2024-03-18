@@ -2,7 +2,7 @@
 {% block header_title %} {{title}} {% endblock %}
 {% block page_content %}
 
-<h1>{{ test }}</h1>
+<!-- <h1>{{ test }}</h1> -->
 
 <div>
 {% for digitalObject in data.document.digitalObjects %}
@@ -35,18 +35,34 @@
         </div>
     </div>
 
-    <div class="bg-white p-6 rounded-lg shadow-md">
-        <h1 class="text-lg font-semibold mb-4">Summary</h1>
-        <p> {{ digitalObject.summary }} </p>
+    <div class="flex items-stretch justify-between border-b bg-white m-4 p-3">
+        <div class="flex-1 bg-white rounded-lg shadow-md overflow-hidden">
+            <h1 class="text-lg font-semibold mb-4 border-b">Summary</h1>
+            <div class="h-40 overflow-y-auto p-6">
+                
+                <p class="line-clamp-10 scrollable">{{ digitalObject.summary }}</p>
+            </div>
+        </div>
+    
+        <div class="flex-1 bg-white rounded-lg shadow-md overflow-hidden">
+            <h1 class="text-lg font-semibold mb-4 border-b">Description</h1>
+            <div class="h-40 overflow-y-auto p-6">
+                <p class="line-clamp-10 scrollable">{{ digitalObject.description }}</p>
+            </div>
+        </div>
     </div>
 </div>
  
 {% endfor %}
 
-<p class="ms-auto text-xs text-gray-500 dark:text-gray-400">Disclaimer: The summary texts are generated using artifical intelligence and is not to be taken as fact.</p>
+<div class="flex justify-between">
+    <div class="py-3 px-5 bg-gray-800 text-white font-semibold rounded-lg hover:shadow-lg transition duration-3000 cursor-pointer w-24">
+        <a href="#" id="back_button" hx-get="/dashboard" hx-trigger="click" hx-target="#replace-me" hx-swap="outerHTML">Back</a>
+    </div>
 
-<div style="width: 10%">
-    {% include "theme/back_button.html" %}
+    <div class="flex items-center">
+        <p class="mr-4 text-xs text-gray-500 dark:text-gray-400">Disclaimer: The summary texts are generated using artificial intelligence and are not to be taken as fact.</p>
+    </div>
 </div>
 
 </div>

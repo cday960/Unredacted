@@ -54,9 +54,8 @@ def extract_pdf_text(pdf_bytes: bytes):
 
     return text
 
-def summarize_pdf(pdf: bytes):
-    pdf_text = extract_pdf_text(pdf)
+def summarize_pdf(text: str):
     '''
     ADD SUMMARY HERE!!!
     '''
-    return pdf_text
+    return None
