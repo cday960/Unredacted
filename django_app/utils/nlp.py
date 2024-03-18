@@ -37,10 +37,11 @@ from ibm_watson.natural_language_understanding_v1 import (
 #     ),
 # ).get_result()
 
+
 def extract_pdf_text(pdf_bytes: bytes):
     # Create a file-like object from the PDF bytes
     pdf_file = io.BytesIO(pdf_bytes)
-    
+
     # Create a PDF reader object
     pdf_reader = PyPDF2.PdfReader(pdf_file)
 
@@ -54,9 +55,10 @@ def extract_pdf_text(pdf_bytes: bytes):
 
     return text
 
+
 def summarize_pdf(pdf: bytes):
     pdf_text = extract_pdf_text(pdf)
-    '''
+    """
     ADD SUMMARY HERE!!!
-    '''
-    return None
+    """
+    return ""

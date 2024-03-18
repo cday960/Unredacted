@@ -5,10 +5,10 @@ from json import JSONEncoder
 
 
 class Encoder(JSONEncoder):
-    def default(self, obj):
-        if isinstance(obj, datetime.datetime):
-            return obj.isoformat()
-        return JSONEncoder.default(self, obj)
+    def default(self, o):
+        if isinstance(o, datetime.datetime):
+            return o.isoformat()
+        return JSONEncoder.default(self, o)
 
 
 class PageContext:

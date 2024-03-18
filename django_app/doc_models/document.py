@@ -1,5 +1,5 @@
 import json
-from typing import Dict, List, Optional, Union
+from typing import Any, Dict, List, Optional, Union
 import datetime
 from json import JSONEncoder
 from .digital_object import DigitalObject
@@ -17,21 +17,29 @@ class Document:
         self,
         title: str = "",
         naId: int = 0,
-        uuid: str = "",
-        # sort: Optional[Tuple[float, str]] = None,
         filename: str = "",
         doc_type: str = "",
         date: datetime.datetime = datetime.datetime.now(),
-        digitalObjects: Optional[List[DigitalObject]] = None,
+        digitalObjects: Optional[List[DigitalObject]] = [],
+        raw_json: Any = None,
     ):
-        self.title = title
-        self.naId = naId
-        self.uuid = uuid
-        # self.sort = sort
-        self.filename = filename
-        self.doc_type = doc_type
-        self.date = date
-        self.digitalObjects = digitalObjects if digitalObjects is not None else []
+        if raw_json is not None:
+            print(raw_json)
+            self.title = raw_json["title"]
+            self.naId = raw_json["naId"]
+            self.filename = raw_json["filename"]
+            self.doc_type = raw_json["doc_type"]
+            self.date = raw_json["date"]
+            self.digitalObjects = []
+            for obj in raw_json["digitalObjects"]:
+                self.digitalObjects.append(DigitalObject(raw_json=obj))
+        else:
+            self.title = title
+            self.naId = naId
+            self.filename = filename
+            self.doc_type = doc_type
+            self.date = date
+            self.digitalObjects = digitalObjects if digitalObjects is not None else []
 
     # debugging func to see info ab document
     def __repr__(self) -> str:
