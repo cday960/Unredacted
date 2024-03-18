@@ -11,14 +11,10 @@ def load_doc(naId: int):
     # then add to database
     # deliver doc
 
-    doc: Document = None
+    doc: Document = db_get_doc(naId)
 
-    json_response = db_get_doc(naId)
-
-    if json_response is not None:
-        # just give the doc back
-        print("Retrieved!")
-        print(json_response)
+    if doc is not None:
+        print(f"Retrieved {doc.filename} from db.")
     else:
         doc = get_doc_from_na(naId)
 

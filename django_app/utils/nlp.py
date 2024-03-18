@@ -59,4 +59,4 @@ def summarize_pdf(pdf: bytes):
     '''
     ADD SUMMARY HERE!!!
     '''
-    return None
+    return pdf_text
