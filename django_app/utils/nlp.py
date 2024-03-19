@@ -36,10 +36,11 @@ natural_language_understanding.set_service_url(NLP_API_URL)
 #     ),
 # ).get_result()
 
+
 def extract_pdf_text(pdf_bytes: bytes):
     # Create a file-like object from the PDF bytes
     pdf_file = io.BytesIO(pdf_bytes)
-    
+
     # Create a PDF reader object
     pdf_reader = PyPDF2.PdfReader(pdf_file)
 
@@ -52,6 +53,7 @@ def extract_pdf_text(pdf_bytes: bytes):
         text += page.extract_text()
 
     return text
+
 
 def summarize_pdf(text: str):
     if len(text) > 0:

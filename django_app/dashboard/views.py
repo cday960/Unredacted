@@ -15,7 +15,11 @@ page_info: PageInfo = PageInfo(
     context=PageContext(test="Initial landing", title="Welcome to Unredacted"),
 )
 
-page_info: PageInfo = PageInfo(render="home_page.html", context=PageContext(test="Initial landing", title="Welcome to Unredacted"))
+page_info: PageInfo = PageInfo(
+    render="home_page.html",
+    context=PageContext(test="Initial landing", title="Welcome to Unredacted"),
+)
+
 
 class HtmxHttpRequest(HttpRequest):
     htmx: HtmxDetails
@@ -56,14 +60,17 @@ def search_docs_index(request: HtmxHttpRequest) -> HttpResponse:
     global page_info
     if request.htmx.trigger == "document_search_button":
         search_query = str(request.POST.get("search_query"))
-        if(len(search_query) > 1):
+        if len(search_query) > 1:
             search_results = get_doc_list_from_na(search_query)
             page_info.set_render_context(
                 render="search_results.html",
                 context=PageContext(
                     test="document search results",
                     title=f"Search results for '{search_query}'",
-                    data={"search_results": search_results, "search_query": search_query},
+                    data={
+                        "search_results": search_results,
+                        "search_query": search_query,
+                    },
                 ),
             )
     return render(request, *page_info.get_render_context_dict())
@@ -92,6 +99,7 @@ def show_pdf(request: HtmxHttpRequest, url: str) -> HttpResponse:
     response = HttpResponse(pdf_content, content_type="application/pdf")
     response["Content-Disposition"] = 'inline; filename="document.pdf"'
     return response
+
 
 @require_GET
 def download_pdf(request: HtmxHttpRequest, url: str) -> HttpResponse:

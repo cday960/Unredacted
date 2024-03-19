@@ -21,12 +21,9 @@ def load_doc(naId: int):
         for digitalObject in doc.digitalObjects:
             pdf_bytes = get_pdf_from_na(digitalObject.url)
             extracted_text = extract_pdf_text(pdf_bytes)
-            digitalObject.description = extracted_text  
+            digitalObject.description = extracted_text
             digitalObject.summary = summarize_pdf(extracted_text)
-            
 
         db_insert_doc(doc)
-        
-        
 
     return doc

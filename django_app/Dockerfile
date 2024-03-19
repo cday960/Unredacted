@@ -1,6 +1,11 @@
 # Use an official Python runtime as a parent image
 FROM python:3.9
 
+LABEL image.authors = "Luke Schaefer sluke817@gmail.com"
+
+RUN apt-get update
+RUN apt-get -y upgrade
+
 # Set environment variables
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
@@ -12,7 +17,7 @@ WORKDIR /app
 ADD . /app/
 
 # Install Node.js
-RUN apt-get update && apt-get install -y nodejs npm
+RUN apt-get install -y nodejs npm
 
 # Install any needed packages specified in requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt

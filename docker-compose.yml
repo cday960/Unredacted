@@ -7,3 +7,5 @@ services:
       - ./django_app:/app
     ports:
       - "8000:8000"
+    env_file:
+      - ./django_app/.env

@@ -13,7 +13,9 @@ HEADERS = {"Content-Type": "application/json", "x-api-key": NA_API_KEY}
 print(f"National Archives API Key: {NA_API_KEY}")
 
 
-def get_doc_list_from_na(search_parameters: str, result_limit: int = 20) -> list[Document]:
+def get_doc_list_from_na(
+    search_parameters: str, result_limit: int = 20
+) -> list[Document]:
     url = (
         f"{NA_API_URL}records/search?q={search_parameters}&limit={result_limit}"
         "&levelOfDescription=item"
@@ -29,13 +31,14 @@ def get_doc_from_na(naId: int) -> Document:
     doc = get_docs_from_json_response(json_response)[0]
     return doc
 
+
 def get_raw_na_url(url: str) -> requests.Response:
     return requests.get(url, headers=HEADERS)
 
+
 def get_pdf_from_na(url: str):
     pdf = get_raw_na_url(url).content
-    return pdf  
-
+    return pdf
 
 
 def get_docs_from_json_response(

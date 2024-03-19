@@ -1,5 +1,5 @@
 # Docker setup
-Not currently working...gotta figure out env variables for API keys
+Make sure to load a .env file with the appropriate API keys
 ```bash
 docker-compose up --build
 ```
