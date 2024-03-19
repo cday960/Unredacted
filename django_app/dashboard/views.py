@@ -15,11 +15,6 @@ page_info: PageInfo = PageInfo(
     context=PageContext(test="Initial landing", title="Welcome to Unredacted"),
 )
 
-page_info: PageInfo = PageInfo(
-    render="home_page.html",
-    context=PageContext(test="Initial landing", title="Welcome to Unredacted"),
-)
-
 
 class HtmxHttpRequest(HttpRequest):
     htmx: HtmxDetails
@@ -27,8 +22,17 @@ class HtmxHttpRequest(HttpRequest):
 
 # basic page display navigation, no arguments
 @require_GET
-def get_index(request: HtmxHttpRequest) -> HttpResponse:
-    # this shows the trigger event in the django server terminal
+def get_landing_index(request: HtmxHttpRequest) -> HttpResponse:
+    global page_info
+    page_info.set_render("landing_page.html")
+    page_info.previous_render = "home_page.html"
+    page_info.set_context(
+        PageContext(test="Initial landing", title="Welcome to Unredacted")
+    )
+    return render(request, *page_info.get_render_context_dict())
+
+
+def get_home_index(request: HtmxHttpRequest) -> HttpResponse:
     print(request.htmx.trigger)
     global page_info
     if request.htmx.trigger == "home_page_button":
@@ -36,43 +40,50 @@ def get_index(request: HtmxHttpRequest) -> HttpResponse:
             render="home_page.html",
             context=PageContext(test="Home Page Switch", title="Home"),
         )
-    elif request.htmx.trigger == "search_page_button":
+    return render(request, *page_info.get_render_context_dict())
+
+
+def get_search_index(request: HtmxHttpRequest) -> HttpResponse:
+    print(request.htmx.trigger)
+    global page_info
+    if request.htmx.trigger == "search_page_button":
         page_info.set_render_context(
             render="search_page.html",
             context=PageContext(test="Search Page Switch", title="Search"),
         )
-    elif request.htmx.trigger == "back_button":
-        page_info.revert()
-    else:
-        page_info.set_render("landing_page.html")
-        page_info.previous_render = "home_page.html"
-        page_info.set_context(
-            PageContext(test="Initial landing", title="Welcome to Unredacted")
-        )
+    return render(request, *page_info.get_render_context_dict())
 
+
+def get_about_index(request: HtmxHttpRequest) -> HttpResponse:
+    print(request.htmx.trigger)
+    global page_info
+    if request.htmx.trigger == "about_page_button":
+        page_info.set_render_context(
+            render="about_page.html",
+            context=PageContext(test="About Page Switch", title="About Unredacted"),
+        )
     return render(request, *page_info.get_render_context_dict())
 
 
 # searching for a document
 @require_POST
-def search_docs_index(request: HtmxHttpRequest) -> HttpResponse:
+def search_results_index(request: HtmxHttpRequest) -> HttpResponse:
     print(request.htmx.trigger)
     global page_info
-    if request.htmx.trigger == "document_search_button":
-        search_query = str(request.POST.get("search_query"))
-        if len(search_query) > 1:
-            search_results = get_doc_list_from_na(search_query)
-            page_info.set_render_context(
-                render="search_results.html",
-                context=PageContext(
-                    test="document search results",
-                    title=f"Search results for '{search_query}'",
-                    data={
-                        "search_results": search_results,
-                        "search_query": search_query,
-                    },
-                ),
-            )
+    search_query = str(request.POST.get("search_query"))
+    if len(search_query) > 1:
+        search_results = get_doc_list_from_na(search_query)
+        page_info.set_render_context(
+            render="search_results.html",
+            context=PageContext(
+                test="document search results",
+                title=f"Search results for '{search_query}'",
+                data={
+                    "search_results": search_results,
+                    "search_query": search_query,
+                },
+            ),
+        )
     return render(request, *page_info.get_render_context_dict())
 
 

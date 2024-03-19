@@ -11,13 +11,15 @@
             <div class="ml-10 flex items-baseline space-x-4">
               <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
               <a href="#" class="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium" aria-current="page" 
-              id="home_page_button" hx-get="/dashboard" hx-trigger="click" hx-target="#replace-me" hx-swap="outerHTML">Home</a>
+              id="home_page_button" hx-get="/home/" hx-trigger="click" hx-target="#replace-me" hx-swap="outerHTML">Home</a>
               <a href="#" class="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium" aria-current="page" 
-              id="search_page_button" hx-get="/dashboard" hx-trigger="click" hx-target="#replace-me" hx-swap="outerHTML">Search Documents</a>
+              id="search_page_button" hx-get="/search/" hx-trigger="click" hx-target="#replace-me" hx-swap="outerHTML">Search Documents</a>
+              <a href="#" class="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium" aria-current="page" 
+              id="about_page_button" hx-get="/about/" hx-trigger="click" hx-target="#replace-me" hx-swap="outerHTML">About</a>
             </div>
           </div>
         </div>
     </div>
 </nav>
 {% endblock %}
-{% block header_title %} {{title}} {% endblock %}
+{% block header_title %} Welcome to Unredacted {% endblock %}

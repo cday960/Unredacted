@@ -5,58 +5,25 @@
 
 <!-- <h1>{{ test }}</h1> -->
 
-<div class="bg-white py-24 sm:py-32">
-    <div class="mx-auto grid max-w-7xl gap-x-8 gap-y-20 px-6 lg:px-8 xl:grid-cols-3">
-      <div class="max-w-2xl">
-        <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Meet the Unredacted team</h2>
-        <p class="mt-6 text-lg leading-8 text-gray-600">Each member is senior CS student at the University of Missouri.</p>
-      </div>
-      <ul role="list" class="grid gap-x-8 gap-y-12 sm:grid-cols-2 sm:gap-y-16 xl:col-span-2">
-        <li>
-          <div class="flex items-center gap-x-6">
-            <img class="h-16 w-16 rounded-full" src="{% static 'images/ls_headshot.jpg' %}" alt="">
-            <div>
-              <h3 class="text-base font-semibold">Luke Schaefer</h3>
-              <p class="text-sm font-semibold">Frontend Developer</p>
-            </div>
-          </div>
-        </li>
-
-        <li>
-            <div class="flex items-center gap-x-6">
-              <img class="h-16 w-16 rounded-full" src="{% static 'images/cd_headshot.jpg' %}" alt="">
-              <div>
-                <h3 class="text-base font-semibold">Cam Day</h3>
-                <p class="text-sm font-semibold">Backend Developer</p>
-              </div>
-            </div>
-          </li>
 
 
-          <li>
-            <div class="flex items-center gap-x-6">
-              <img class="h-16 w-16 rounded-full" src="{% static 'images/rs_headshot.jpg' %}" alt="">
-              <div>
-                <h3 class="text-base font-semibold">Ryan Sellers</h3>
-                <p class="text-sm font-semibold">NLP Architect</p>
-              </div>
-            </div>
-          </li>
-
-
-          <li>
-            <div class="flex items-center gap-x-6">
-              <img class="h-16 w-16 rounded-full" src="{% static 'images/lv_headshot.png' %}" alt="">
-              <div>
-                <h3 class="text-base font-semibold">Landon Vowels</h3>
-                <p class="text-sm font-semibold">Database Manager</p>
-              </div>
-            </div>
-          </li>
-  
-        <!-- More people... -->
-      </ul>
-    </div>
+<div class="relative isolate overflow-hiddenpy-24 sm:py-32">
+    
+  <div class="hidden sm:absolute sm:-top-10 sm:right-1/2 sm:-z-10 sm:mr-10 sm:block sm:transform-gpu sm:blur-3xl" aria-hidden="true">
+    <div class="aspect-[1097/845] w-[68.5625rem] bg-gradient-to-tr from-[#ff4694] to-[#776fff] opacity-20" style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)"></div>
   </div>
+  <div class="absolute -top-52 left-1/2 -z-10 -translate-x-1/2 transform-gpu blur-3xl sm:top-[-28rem] sm:ml-16 sm:translate-x-0 sm:transform-gpu" aria-hidden="true">
+    <div class="aspect-[1097/845] w-[68.5625rem] bg-gradient-to-tr from-[#ff4694] to-[#776fff] opacity-20" style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)"></div>
+  </div>
+  <div class="mx-auto max-w-7xl px-6 lg:px-8">
+    <div class="mx-auto max-w-2xl lg:mx-0">
+      <h2 class="text-4xl font-bold tracking-tight text-gray-600 sm:text-6xl">Unconver the Truth</h2>
+      <p class="mt-6 text-lg leading-8 text-gray-600">Find whats important to you quickly. Search through thousands of declassified documents and quickly download PDFs, view summaries, and get an in-depth analysis provided by next generation artificial intelligence.</p>
+    </div>
+    
+  </div>
+</div>
+
+
 
 {% endblock %}
