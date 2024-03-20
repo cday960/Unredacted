@@ -1,0 +1,522 @@
+[33mcommit 419c0e940e361ec0d11aa547366b9ee61b494ff7[m[33m ([m[1;36mHEAD -> [m[1;32mdev/luke[m[33m, [m[1;31morigin/dev/luke[m[33m, [m[1;31morigin/DEMO[m[33m, [m[1;32mDEMO[m[33m)[m
+Author: Luke Schaefer <lukeschaefer17@gmail.com>
+Date:   Tue Mar 19 19:34:37 2024 -0500
+
+    looking good for demo
+
+[33mcommit e69abf1797cbcc802a9b3596bb0ad9f188fb069b[m
+Author: Luke Schaefer <lukeschaefer17@gmail.com>
+Date:   Tue Mar 19 18:22:10 2024 -0500
+
+    cleanup
+
+[33mcommit 02522474515e426f412492f660cfe3cdfad53cd1[m
+Author: Luke Schaefer <lukeschaefer17@gmail.com>
+Date:   Tue Mar 19 17:27:24 2024 -0500
+
+    cleanup
+
+[33mcommit c26ef1caaf466752ca63c0d532fe189d67b9b6ad[m[33m ([m[1;32mmain[m[33m)[m
+Author: Luke Schaefer <lukeschaefer17@gmail.com>
+Date:   Tue Mar 19 16:44:27 2024 -0500
+
+    qupdate
+
+[33mcommit beac81f9ff3d6264ba725767bfdf460bba3f4d47[m
+Author: Luke Schaefer <lukeschaefer17@gmail.com>
+Date:   Mon Mar 18 16:04:52 2024 -0500
+
+    working for demo
+
+[33mcommit 6db2cb1bc3f641e655fcb1864c396e17c24eb7f1[m
+Author: Luke Schaefer <lukeschaefer17@gmail.com>
+Date:   Mon Mar 18 14:09:01 2024 -0500
+
+    speed up and cleanup db
+
+[33mcommit dfe9a8998f3aa96508fb2b9042e8a8896238ee41[m
+Author: Luke Schaefer <lukeschaefer17@gmail.com>
+Date:   Mon Mar 18 01:07:46 2024 -0500
+
+    qupdate
+
+[33mcommit 1b51a5981c0d41f032661d06320f0d86ec09c49c[m
+Author: Luke Schaefer <lukeschaefer17@gmail.com>
+Date:   Mon Mar 18 01:06:42 2024 -0500
+
+    qupdate
+
+[33mcommit 34fb1578886005a1b2892dde3f84f615a9676ac2[m
+Author: Luke Schaefer <lukeschaefer17@gmail.com>
+Date:   Mon Mar 18 01:06:25 2024 -0500
+
+    added dcompose
+
+[33mcommit 5ac4076342c3471edeaf47df8db23404e65951bd[m
+Merge: d599d5a 8206842
+Author: Luke Schaefer <lukeschaefer17@gmail.com>
+Date:   Mon Mar 18 01:05:25 2024 -0500
+
+    merge conflict
+
+[33mcommit d599d5a6af2739213cde65d26f9b9a7d23d76fbc[m
+Author: Luke Schaefer <lukeschaefer17@gmail.com>
+Date:   Mon Mar 18 01:03:20 2024 -0500
+
+    begin NLP work
+
+[33mcommit ca3bac5d989d90e964d040f7b9e85eaa95efbe76[m
+Author: cday960 <c.day960@gmail.com>
+Date:   Thu Mar 14 22:56:26 2024 -0500
+
+    added endpoints to docs
+
+[33mcommit 93ba7f4ea1472b26ca03918a7b2e11164141cdb8[m
+Author: cday960 <c.day960@gmail.com>
+Date:   Thu Mar 14 22:54:54 2024 -0500
+
+    renamed flask_api to atlas
+
+[33mcommit c91108081a6c2ca38ccb594f173eb9e0b2ecfbaa[m
+Merge: 500d60e 350a303
+Author: cday960 <c.day960@gmail.com>
+Date:   Thu Mar 14 22:53:37 2024 -0500
+
+    Merge branch 'main' into dev/cameron
+
+[33mcommit 350a303a64dd153f71c4b722b1711441465196f0[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: Cameron Day <42944700+cday960@users.noreply.github.com>
+Date:   Thu Mar 14 22:52:31 2024 -0500
+
+    changed my name in README.md
+
+[33mcommit 500d60ef1631ebac1f2c30b865956e1b3defc82f[m
+Author: cday960 <c.day960@gmail.com>
+Date:   Thu Mar 14 22:49:12 2024 -0500
+
+    refactored for blueprints
+
+[33mcommit b595a2a17ccf871fdfffc4394ceaca4b54b18d0b[m
+Merge: be86d32 48483dc
+Author: Cameron Day <42944700+cday960@users.noreply.github.com>
+Date:   Thu Mar 14 14:43:07 2024 -0500
+
+    Merge pull request #13 from cday960/dev/cameron
+    
+    Added search endpoint given ID
+
+[33mcommit 48483dca213dfabbc1d9e337df77906bdc3fe1cb[m
+Author: Cameron Day <42944700+cday960@users.noreply.github.com>
+Date:   Thu Mar 14 14:37:47 2024 -0500
+
+    Rename endpoints.md to README.md
+
+[33mcommit 3dcce4f52dc58284002edbb0fae3246ca0c2e77e[m
+Author: cday960 <c.day960@gmail.com>
+Date:   Thu Mar 14 14:35:47 2024 -0500
+
+    fixed some bugs
+
+[33mcommit cd1546d888784679070f03f555887d200a678d82[m
+Merge: 765f552 be86d32
+Author: cday960 <c.day960@gmail.com>
+Date:   Thu Mar 14 14:33:34 2024 -0500
+
+    Merge branch 'main' into dev/cameron
+
+[33mcommit 765f5524f2105f28fab8c075a5542b2660076ee0[m
+Author: cday960 <c.day960@gmail.com>
+Date:   Thu Mar 14 14:19:56 2024 -0500
+
+    added id search
+
+[33mcommit be86d327390be3f46535dfd3786fc1f98ee618e2[m
+Author: Luke Schaefer <lukeschaefer17@gmail.com>
+Date:   Mon Mar 11 22:26:12 2024 -0500
+
+    Dev/luke (#12)
+    
+    * added webapp search endpoint
+    
+    * added datetime to document
+    
+    * added custom encoder for datetime
+    
+    * changed uuid to naId
+    
+    * refactor, added dockerization
+    
+    * Add better parameter passing
+    
+    ---------
+    
+    Co-authored-by: cday960 <c.day960@gmail.com>
+
+[33mcommit 82068427c0fc0d5cc49ca6181db6eae69d1f4d4f[m
+Author: Luke Schaefer <lukeschaefer17@gmail.com>
+Date:   Mon Mar 11 22:24:57 2024 -0500
+
+    Add better parameter passing
+
+[33mcommit ea54f3774d4203c36d8f861f805beb6fa8a20bc8[m
+Merge: 0badf85 ca09463
+Author: Luke Schaefer <lukeschaefer17@gmail.com>
+Date:   Wed Mar 6 22:04:30 2024 -0600
+
+    Merge branch 'main' into dev/luke
+
+[33mcommit ca0946306f32f5080220119092287ef683ea3546[m
+Author: Luke Schaefer <lukeschaefer17@gmail.com>
+Date:   Wed Mar 6 22:03:52 2024 -0600
+
+    merge dev/luke into main (#11)
+    
+    * added webapp search endpoint
+    
+    * added datetime to document
+    
+    * added custom encoder for datetime
+    
+    * changed uuid to naId
+    
+    * refactor, added dockerization
+    
+    ---------
+    
+    Co-authored-by: cday960 <c.day960@gmail.com>
+
+[33mcommit 0badf85dc52fc38c884e291272f3ec535c03a94a[m
+Merge: 7f351ae 0cbda71
+Author: Luke Schaefer <lukeschaefer17@gmail.com>
+Date:   Wed Mar 6 22:02:51 2024 -0600
+
+    cleanup
+
+[33mcommit 0cbda714c0a9a5d9948132417f41ffdb7be8d962[m
+Merge: a4ffe66 4130b15
+Author: Luke Schaefer <lukeschaefer17@gmail.com>
+Date:   Wed Mar 6 21:59:56 2024 -0600
+
+    Merge pull request #10 from cday960/sluke817-patch-startsh
+    
+    Update start.sh
+
+[33mcommit 4130b15ccc4da2a43f5053f407195ea11d7e480f[m
+Author: Luke Schaefer <lukeschaefer17@gmail.com>
+Date:   Wed Mar 6 21:59:42 2024 -0600
+
+    Update start.sh
+
+[33mcommit a4ffe6688418f9b16a93e768200d09756c05aab7[m
+Author: Luke Schaefer <lukeschaefer17@gmail.com>
+Date:   Wed Mar 6 21:40:24 2024 -0600
+
+    Refactor for Dockerization (#9)
+    
+    * added webapp search endpoint
+    
+    * added datetime to document
+    
+    * added custom encoder for datetime
+    
+    * changed uuid to naId
+    
+    * refactor, added dockerization
+    
+    ---------
+    
+    Co-authored-by: cday960 <c.day960@gmail.com>
+
+[33mcommit 7f351aee181bdfce0952882be35f576053395ae6[m
+Merge: c1ed22b a0d6c00
+Author: Luke Schaefer <lukeschaefer17@gmail.com>
+Date:   Wed Mar 6 21:39:50 2024 -0600
+
+    Merge branch 'main' into dev/luke
+
+[33mcommit a0d6c00c036e32eb26db18423cd2643154093875[m
+Author: Cameron Day <42944700+cday960@users.noreply.github.com>
+Date:   Wed Mar 6 21:36:49 2024 -0600
+
+    Basic document search endpoint (#8)
+    
+    * added webapp search endpoint
+    
+    * added datetime to document
+    
+    * added custom encoder for datetime
+    
+    * changed uuid to naId
+
+[33mcommit c1ed22b05a04a5d673d6acbe655d74e5c66c396d[m
+Author: Luke Schaefer <lukeschaefer17@gmail.com>
+Date:   Wed Mar 6 21:36:16 2024 -0600
+
+    refactor, added dockerization
+
+[33mcommit 53bc814cabedb4311e4e7a33bcfd48398e67dc7e[m
+Author: cday960 <c.day960@gmail.com>
+Date:   Tue Mar 5 17:50:39 2024 -0600
+
+    changed uuid to naId
+
+[33mcommit bf961ee07b90a1ebaf2fcb5e1b05733df3d1a208[m
+Author: cday960 <c.day960@gmail.com>
+Date:   Tue Mar 5 17:41:00 2024 -0600
+
+    added custom encoder for datetime
+
+[33mcommit a43b84b1b18b4650f53f1ddde6b4ba6ad977d5dc[m
+Author: cday960 <c.day960@gmail.com>
+Date:   Tue Mar 5 17:35:34 2024 -0600
+
+    added datetime to document
+
+[33mcommit c3b417db4e09ebc6ec6a8739cbf416b05918540f[m
+Merge: ddb2f50 bd84030
+Author: cday960 <c.day960@gmail.com>
+Date:   Tue Mar 5 16:07:11 2024 -0600
+
+    Merge branch 'main' into dev/cameron
+
+[33mcommit ddb2f50edf170d0dd81a7ff3eec8f8dd56fcf0b9[m
+Author: cday960 <c.day960@gmail.com>
+Date:   Tue Mar 5 16:06:43 2024 -0600
+
+    added webapp search endpoint
+
+[33mcommit bd840307519f8bcb46cf00a707ed0dc7f0db8613[m
+Merge: 4eec388 19071c0
+Author: Ryan Sellers <70039503+SyanRellers@users.noreply.github.com>
+Date:   Mon Feb 19 17:17:11 2024 -0600
+
+    Merge pull request #7 from cday960/NLPDEV
+    
+    Initial NLP Script Development by Ryan Sellers.
+
+[33mcommit 19071c028d41eceb852eb2ea0cce84c988988128[m[33m ([m[1;31morigin/NLPDEV[m[33m)[m
+Author: rpsdfv <rpsdfv@umsystem.edu>
+Date:   Mon Feb 19 17:06:14 2024 -0600
+
+    Initial NLP Script Development by Ryan Sellers.
+    Still need to integrate with Unredacted API.
+
+[33mcommit 4eec38894b184f058dc664868a99b59ddd1e16f1[m[33m ([m[1;31morigin/dev/landon[m[33m)[m
+Merge: e79fc84 42ab4ce
+Author: Luke Schaefer <lukeschaefer17@gmail.com>
+Date:   Tue Feb 13 13:22:07 2024 -0600
+
+    Merge pull request #6 from cday960/dev/luke
+    
+    Dev/luke
+
+[33mcommit 42ab4cebd1dc1bb1f18526f620a23a2fa8c8cb1d[m
+Merge: 394e3cb e79fc84
+Author: Luke Schaefer <lukeschaefer17@gmail.com>
+Date:   Tue Feb 13 13:20:57 2024 -0600
+
+    Merge branch 'main' of github.com:cday960/Unredacted
+
+[33mcommit e79fc84e4b1dc95fc2edb19c35f2c700b174e2d4[m
+Merge: f5a12d4 d3a39c2
+Author: Luke Schaefer <lukeschaefer17@gmail.com>
+Date:   Tue Feb 13 13:18:12 2024 -0600
+
+    Merge pull request #5 from cday960/dev/cameron
+    
+    Merge Dev/cameron
+
+[33mcommit d3a39c2bc3571fe96fae75313b36e70e75adcdcb[m
+Merge: 100f9f7 f5a12d4
+Author: cday960 <c.day960@gmail.com>
+Date:   Fri Feb 9 11:20:16 2024 -0600
+
+    Merge branch 'main' into dev/cameron
+
+[33mcommit 100f9f7695fd9cb5170b18c4742cc11acec103c9[m
+Author: cday960 <c.day960@gmail.com>
+Date:   Fri Feb 9 11:19:56 2024 -0600
+
+    implemented .env file for api key
+
+[33mcommit f5a12d475764b2c989282a2aa8b9d420bf49b50e[m
+Merge: 027b006 0b889ae
+Author: Luke Schaefer <lukeschaefer17@gmail.com>
+Date:   Tue Feb 6 13:28:55 2024 -0600
+
+    Merge pull request #4 from cday960/frontend-dev
+    
+    Frontend dev
+
+[33mcommit 0b889ae176512687d926ddf979c953235dd39a1c[m[33m ([m[1;31morigin/frontend-dev[m[33m)[m
+Author: Luke Schaefer <lukeschaefer17@gmail.com>
+Date:   Tue Feb 6 13:28:09 2024 -0600
+
+    fixed missing query
+
+[33mcommit f4937cc844c904852c548733400009dbb0bde9c8[m
+Author: Luke Schaefer <lukeschaefer17@gmail.com>
+Date:   Mon Feb 5 10:33:05 2024 -0600
+
+    query not being passed through
+
+[33mcommit b6102f78e32e4ba4989f799eb2e1324591284b62[m
+Author: cday960 <c.day960@gmail.com>
+Date:   Mon Feb 5 09:19:02 2024 -0600
+
+    started implementing webapp search endpoint
+
+[33mcommit 027b0060d30c4569ab2ee9e4423a05fc38e9dcd1[m
+Author: cday960 <c.day960@gmail.com>
+Date:   Mon Feb 5 08:24:05 2024 -0600
+
+    modified readme
+
+[33mcommit 11d39fc0095f57fdd0278316a779a5e6b819f693[m
+Merge: 6c14773 1e45fed
+Author: Luke Schaefer <lukeschaefer17@gmail.com>
+Date:   Sun Jan 28 16:36:26 2024 -0600
+
+    Merge pull request #3 from cday960/frontend-dev
+    
+    combine home/landing
+
+[33mcommit 6c14773baf589926cfe62a9e80346175d266fb87[m
+Merge: f0e16f5 a9fd6d7
+Author: Luke Schaefer <lukeschaefer17@gmail.com>
+Date:   Sun Jan 28 16:32:28 2024 -0600
+
+    Merge pull request #2 from cday960/frontend-dev
+    
+    Frontend dev
+
+[33mcommit 394e3cb3903bca37dd1f6440ec64f4101f89689b[m
+Merge: 1e45fed 6c14773
+Author: Luke Schaefer <lukeschaefer17@gmail.com>
+Date:   Sun Jan 28 16:31:00 2024 -0600
+
+    Merge branch 'main' of github.com:cday960/Unredacted
+
+[33mcommit 1e45fed0aed4d81d0394e579cd2c51aa50be94ea[m
+Author: Luke Schaefer <lukeschaefer17@gmail.com>
+Date:   Sun Jan 28 16:24:38 2024 -0600
+
+    combine home/landing
+
+[33mcommit a9fd6d7ba24a18bc850d04db721100a167c5281e[m
+Author: Luke Schaefer <lukeschaefer17@gmail.com>
+Date:   Sun Jan 28 16:14:30 2024 -0600
+
+    back button func
+
+[33mcommit 92c08f3be9043c9551bc4f1edcf16b270e134dba[m
+Author: Luke Schaefer <lukeschaefer17@gmail.com>
+Date:   Sun Jan 28 15:31:00 2024 -0600
+
+    qupdate
+
+[33mcommit aa543e5466dc1427af10f27bb6a72d953a5d31c3[m
+Author: Luke Schaefer <lukeschaefer17@gmail.com>
+Date:   Sun Jan 28 15:17:59 2024 -0600
+
+    componentize
+
+[33mcommit fe672842f7b98e73fb88ece525d7471f3d37c312[m
+Author: Luke Schaefer <lukeschaefer17@gmail.com>
+Date:   Sun Jan 28 14:54:42 2024 -0600
+
+    more flow
+
+[33mcommit 8647d2c0fd9498f3b6db732ac9eb374f1398d56a[m
+Author: Luke Schaefer <lukeschaefer17@gmail.com>
+Date:   Tue Jan 23 16:55:34 2024 -0600
+
+    Updated Readme
+
+[33mcommit 091c8fc7aa7a9a3172fbff6a60580cde07383293[m
+Author: Luke Schaefer <lukeschaefer17@gmail.com>
+Date:   Tue Jan 23 16:51:37 2024 -0600
+
+    cleanup
+
+[33mcommit 15c349df93913a32c312591ea50b8d973df22aa8[m
+Author: Luke Schaefer <lukeschaefer17@gmail.com>
+Date:   Tue Jan 23 16:40:55 2024 -0600
+
+    initial simple page navigation
+
+[33mcommit f0e16f56b1a72136b9d76e32cbd841785b6c85b4[m
+Merge: 6aace7b e7d3268
+Author: Cameron Day <42944700+cday960@users.noreply.github.com>
+Date:   Tue Oct 31 12:16:24 2023 -0500
+
+    Merge pull request #1 from cday960/cday960-patch-1
+    
+    Update README.md
+
+[33mcommit e7d3268340d725bad2f3ce054aa29863c22cdf2a[m
+Author: Cameron Day <42944700+cday960@users.noreply.github.com>
+Date:   Tue Oct 31 12:14:26 2023 -0500
+
+    Update README.md
+
+[33mcommit 6aace7b403bc7ff2af0df68c3526bbc02b7e6035[m
+Author: Cameron Day <42944700+cday960@users.noreply.github.com>
+Date:   Tue Oct 31 08:13:49 2023 -0500
+
+    Update README.md
+
+[33mcommit 7fd3273abf3d40aa4c065e24a6a862e063603e11[m
+Author: cday960 <c.day960@gmail.com>
+Date:   Tue Oct 31 08:12:01 2023 -0500
+
+    setup initial partial rendering and api example with htmx
+
+[33mcommit 2b33a9292b1353f9bccb5a1eb6014b0ab6e15333[m
+Author: cday960 <c.day960@gmail.com>
+Date:   Mon Oct 30 19:58:48 2023 -0500
+
+    installed htmx and tailwind, setup base template and created initial
+    dashboard app
+
+[33mcommit f970c7d2b1746c57f63e0f12ac1ccb8cce3497f0[m
+Author: cday960 <c.day960@gmail.com>
+Date:   Mon Oct 30 19:25:14 2023 -0500
+
+    moved files around
+
+[33mcommit 8157c6a093ad1e2dbe229037c4da09b37a7c5ff5[m
+Author: cday960 <c.day960@gmail.com>
+Date:   Mon Oct 30 19:24:30 2023 -0500
+
+    updated readme again
+
+[33mcommit 37b7b5916c94fa7e19cb0c23ee3ab54253c58cf1[m
+Author: cday960 <c.day960@gmail.com>
+Date:   Mon Oct 30 19:22:32 2023 -0500
+
+    Updated readme
+
+[33mcommit c1de297bd5093acda91bb152b6a01b6fcd4854ce[m
+Author: cday960 <c.day960@gmail.com>
+Date:   Mon Oct 30 19:20:48 2023 -0500
+
+    initial django setup
+
+[33mcommit 38747b24e5cc1b62ff8b92c7b71ceeb7b76a858c[m
+Author: cday960 <c.day960@gmail.com>
+Date:   Mon Oct 30 19:18:51 2023 -0500
+
+    updated requirements
+
+[33mcommit 922bae8b89c77228104817c5231dfa5b469ed159[m
+Author: cday960 <c.day960@gmail.com>
+Date:   Tue Oct 3 22:28:07 2023 -0500
+
+    init commit
+
+[33mcommit cb9593415a0d993f8461f41cd241aa5710f654ad[m
+Author: Cameron Day <42944700+cday960@users.noreply.github.com>
+Date:   Tue Oct 3 22:24:19 2023 -0500
+
+    Initial commit
