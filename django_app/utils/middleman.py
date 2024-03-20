@@ -1,7 +1,9 @@
 from doc_models import Document, DigitalObject
-from .db_interaction import db_get_doc, db_insert_doc
+from .db_interaction import MongoDb
 from .na_search import get_doc_from_na, get_pdf_from_na
 from .nlp import summarize_pdf, extract_pdf_text
+
+db = MongoDb()
 
 
 def load_doc(naId: int):
@@ -11,7 +13,7 @@ def load_doc(naId: int):
     # then add to database
     # deliver doc
 
-    doc: Document = db_get_doc(naId)
+    doc: Document = db.get_doc(naId)
 
     if doc is not None:
         print(f"Retrieved {doc.filename} from db.")
@@ -24,6 +26,10 @@ def load_doc(naId: int):
             digitalObject.description = extracted_text
             digitalObject.summary = summarize_pdf(extracted_text)
 
-        db_insert_doc(doc)
+        db.insert_doc(doc)
 
     return doc
+
+def get_recent_docs(num_docs: int = 10) -> list[Document]:
+    doc_list = db.get_recent_docs(num_docs)
+    return doc_list

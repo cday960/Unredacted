@@ -1,10 +1,9 @@
 {% extends "theme/base_page.html" %}
-{% block header_title %} {{title}} {% endblock %}
+{% block header_title %} Search results for '{{ data.search_query }}'' {% endblock %}
 {% block page_content %}
 
 <!-- <h1>{{ test }}</h1> -->
 
-<p>Searching for {{ data.search_query }}</p>
 <ul role="list" class="divide-y divide-gray-100">
     {% for result in data.search_results %}
     <li class="flex justify-between gap-x-6 py-5">

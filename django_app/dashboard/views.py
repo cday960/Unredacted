@@ -6,13 +6,14 @@ from .models import PageInfo, PageContext
 
 from django_htmx.middleware import HtmxDetails
 
-from utils import load_doc, get_doc_list_from_na, get_raw_na_url
+from utils import load_doc, get_doc_list_from_na, get_raw_na_url, get_recent_docs
 from doc_models import Document
 
 
 page_info: PageInfo = PageInfo(
-    render="home_page.html",
+    render="landing_page.html",
     context=PageContext(test="Initial landing", title="Welcome to Unredacted"),
+    avoid_switch={"landing_page.html": "home_page.html"}
 )
 
 
@@ -20,48 +21,47 @@ class HtmxHttpRequest(HttpRequest):
     htmx: HtmxDetails
 
 
-# basic page display navigation, no arguments
-@require_GET
-def get_landing_index(request: HtmxHttpRequest) -> HttpResponse:
-    global page_info
-    page_info.set_render("landing_page.html")
-    page_info.previous_render = "home_page.html"
-    page_info.set_context(
-        PageContext(test="Initial landing", title="Welcome to Unredacted")
-    )
-    return render(request, *page_info.get_render_context_dict())
-
-
 def get_home_index(request: HtmxHttpRequest) -> HttpResponse:
     print(request.htmx.trigger)
     global page_info
+    recent_docs = get_recent_docs(num_docs=5)
     if request.htmx.trigger == "home_page_button":
         page_info.set_render_context(
             render="home_page.html",
-            context=PageContext(test="Home Page Switch", title="Home"),
+            context=PageContext(test="Home Page Switch", title="Home", data={'recent_docs': recent_docs}),
         )
+    else:
+        page_info.set_render_context(
+            render="landing_page.html",
+            context=PageContext(test="Initial landing", title="Welcome to Unredacted", data={'recent_docs': recent_docs}),
+        )
+        page_info.render = "landing_page.html"
     return render(request, *page_info.get_render_context_dict())
 
 
 def get_search_index(request: HtmxHttpRequest) -> HttpResponse:
     print(request.htmx.trigger)
     global page_info
-    if request.htmx.trigger == "search_page_button":
-        page_info.set_render_context(
-            render="search_page.html",
-            context=PageContext(test="Search Page Switch", title="Search"),
-        )
+    page_info.set_render_context(
+        render="search_page.html",
+        context=PageContext(test="Search Page Switch", title="Search"),
+    )
     return render(request, *page_info.get_render_context_dict())
 
 
 def get_about_index(request: HtmxHttpRequest) -> HttpResponse:
     print(request.htmx.trigger)
     global page_info
-    if request.htmx.trigger == "about_page_button":
-        page_info.set_render_context(
-            render="about_page.html",
-            context=PageContext(test="About Page Switch", title="About Unredacted"),
-        )
+    page_info.set_render_context(
+        render="about_page.html",
+        context=PageContext(test="About Page Switch", title="About Unredacted"),
+    )
+    return render(request, *page_info.get_render_context_dict())
+
+def get_back_index(request: HtmxHttpRequest) -> HttpResponse:
+    print(request.htmx.trigger)
+    global page_info
+    page_info.revert()
     return render(request, *page_info.get_render_context_dict())
 
 
@@ -91,16 +91,15 @@ def search_results_index(request: HtmxHttpRequest) -> HttpResponse:
 def display_doc_index(request: HtmxHttpRequest, naId: int) -> HttpResponse:
     print(request.htmx.trigger)
     global page_info
-    if request.htmx.trigger == "document_page_button":
-        document: Document = load_doc(naId)
-        page_info.set_render_context(
-            render="document_page.html",
-            context=PageContext(
-                test=f"Document load: naId = {document.naId}",
-                title=f"{document.title}",
-                data={"document": document},
-            ),
-        )
+    document: Document = load_doc(naId)
+    page_info.set_render_context(
+        render="document_page.html",
+        context=PageContext(
+            test=f"Document load: naId = {document.naId}",
+            title=f"{document.title}",
+            data={"document": document},
+        ),
+    )
     return render(request, *page_info.get_render_context_dict())
 
 

@@ -24,11 +24,12 @@ class PageContext:
 
 
 class PageInfo:
-    def __init__(self, render: str, context: PageContext):
+    def __init__(self, render: str, context: PageContext, avoid_switch: dict[str, str] = None):
         self.render = render
         self.context = context
         self.previous_render = render
         self.previous_context = context
+        self.avoid_switch: dict[str, str] = avoid_switch if avoid_switch is not None else {}
 
     def get_render(self) -> str:
         return self.render
@@ -55,5 +56,7 @@ class PageInfo:
         self.set_context(context)
 
     def revert(self) -> None:
+        if self.previous_render in self.avoid_switch:
+            self.previous_render = self.avoid_switch[self.previous_render]
         self.set_render(self.previous_render)
         self.set_context(self.previous_context)
