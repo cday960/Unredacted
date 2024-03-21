@@ -5,7 +5,7 @@ class DigitalObject:
         url: str,
         type: str,
         description: str,
-        summary: str = None,
+        summary: str = "This document is currently undergoing processing! Please come back later for result.",
     ):
         self.filename = filename
         self.url = url
