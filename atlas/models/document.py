@@ -18,7 +18,6 @@ class Document:
         title: str = "",
         naId: int = 0,
         uuid: str = "",
-        # sort: Optional[Tuple[float, str]] = None,
         filename: str = "",
         doc_type: str = "",
         date: datetime.datetime = datetime.datetime.now(),
@@ -27,7 +26,6 @@ class Document:
         self.title = title
         self.naId = naId
         self.uuid = uuid
-        # self.sort = sort
         self.filename = filename
         self.doc_type = doc_type
         self.date = date

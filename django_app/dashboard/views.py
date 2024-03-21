@@ -3,11 +3,10 @@ from django.http import HttpRequest, HttpResponse, FileResponse
 from django.views.decorators.http import require_GET
 from django.views.decorators.http import require_POST
 from .models import PageInfo, PageContext
-
 from django_htmx.middleware import HtmxDetails
 
-from utils import load_doc, get_doc_list_from_na, get_raw_na_url, get_recent_docs
 from doc_models import Document
+from backend import logic_controller as lc
 
 
 page_info: PageInfo = PageInfo(
@@ -24,7 +23,7 @@ class HtmxHttpRequest(HttpRequest):
 def get_home_index(request: HtmxHttpRequest) -> HttpResponse:
     print(request.htmx.trigger)
     global page_info
-    recent_docs = get_recent_docs(num_docs=5)
+    recent_docs = lc.get_recent_docs(num_docs=5)
     if request.htmx.trigger == "home_page_button":
         page_info.set_render_context(
             render="home_page.html",
@@ -72,7 +71,7 @@ def search_results_index(request: HtmxHttpRequest) -> HttpResponse:
     global page_info
     search_query = str(request.POST.get("search_query"))
     if len(search_query) > 1:
-        search_results = get_doc_list_from_na(search_query)
+        search_results = lc.get_docs(search_query)
         page_info.set_render_context(
             render="search_results.html",
             context=PageContext(
@@ -91,7 +90,7 @@ def search_results_index(request: HtmxHttpRequest) -> HttpResponse:
 def display_doc_index(request: HtmxHttpRequest, naId: int) -> HttpResponse:
     print(request.htmx.trigger)
     global page_info
-    document: Document = load_doc(naId)
+    document: Document = lc.get_doc(naId)
     page_info.set_render_context(
         render="document_page.html",
         context=PageContext(
@@ -105,7 +104,7 @@ def display_doc_index(request: HtmxHttpRequest, naId: int) -> HttpResponse:
 
 @require_GET
 def show_pdf(request: HtmxHttpRequest, url: str) -> HttpResponse:
-    pdf_content = get_raw_na_url(url).content
+    pdf_content = lc.get_pdf(url)
     response = HttpResponse(pdf_content, content_type="application/pdf")
     response["Content-Disposition"] = 'inline; filename="document.pdf"'
     return response
@@ -113,7 +112,7 @@ def show_pdf(request: HtmxHttpRequest, url: str) -> HttpResponse:
 
 @require_GET
 def download_pdf(request: HtmxHttpRequest, url: str) -> HttpResponse:
-    pdf_content = get_raw_na_url(url).content
+    pdf_content = lc.get_pdf(url)
     response = HttpResponse(pdf_content, content_type="application/pdf")
     response["Content-Disposition"] = 'attachment; filename="document.pdf"'
     return response
