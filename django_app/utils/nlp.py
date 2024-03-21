@@ -1,6 +1,7 @@
 import io
 import os
 import PyPDF2
+import json
 from ibm_watson import NaturalLanguageUnderstandingV1
 from ibm_cloud_sdk_core.authenticators import IAMAuthenticator
 from ibm_watson.natural_language_understanding_v1 import (
@@ -9,6 +10,7 @@ from ibm_watson.natural_language_understanding_v1 import (
     CategoriesOptions,
     ConceptsOptions,
     KeywordsOptions,
+    SummarizationOptions
 )
 
 NLP_API_KEY = str(os.getenv("NLP_API_KEY"))
@@ -55,7 +57,7 @@ def extract_pdf_text(pdf_bytes: bytes):
     return text
 
 
-def summarize_pdf(text: str):
+def nlp_analysis(text: str):
     if len(text) > 0:
         response = natural_language_understanding.analyze(
             text=text,
@@ -64,7 +66,9 @@ def summarize_pdf(text: str):
                 categories=CategoriesOptions(limit=10),
                 concepts=ConceptsOptions(limit=10),
                 keywords=KeywordsOptions(limit=20),
+                summary = SummarizationOptions(limit=10)
             ),
         ).get_result()
+        return_nlp = json.dumps(response)
         print(response)
-    return None
+    return return_nlp
