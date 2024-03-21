@@ -1,5 +1,5 @@
 from typing import Any
-from doc_models import Document, DigitalObject
+from models import Document, DigitalObject
 
 def fill_doc_from_db_json(db_json: dict[str, Any]) -> Document:
         doc: Document = None

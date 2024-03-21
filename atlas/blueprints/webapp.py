@@ -3,7 +3,6 @@ from flask import Blueprint, jsonify
 from models import Document
 from utils import search_logic
 
-
 webapp = Blueprint("webapp", __name__, url_prefix="/webapp")
 
 

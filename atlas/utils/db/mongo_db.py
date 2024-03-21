@@ -1,7 +1,7 @@
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
 
-from doc_models import Document, DigitalObject
+from models import Document, DigitalObject
 from typing import Any
 
 from .db_env import MONGO_URI, DB_NAME, COLLECTION_NAME
