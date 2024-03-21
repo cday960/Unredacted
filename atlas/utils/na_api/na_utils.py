@@ -1,44 +1,18 @@
-import os
-import json
-import requests
-from dotenv import load_dotenv
-from doc_models import Document, DigitalObject
+import re
+from models import Document, DigitalObject
 
-load_dotenv()
+def valid_date_param(date: str) -> bool:
+    date_pattern = "^\d{4}-\d{2}-\d{2}$"
+    if re.match(date_pattern, date):
+        return True
+    else:
+        return False
 
-NA_API_URL = "https://catalog.archives.gov/api/v2/"
-NA_API_KEY = str(os.getenv("NA_API_KEY"))
-HEADERS = {"Content-Type": "application/json", "x-api-key": NA_API_KEY}
-
-print(f"National Archives API Key: {NA_API_KEY}")
-
-
-def get_doc_list_from_na(
-    search_parameters: str, result_limit: int = 20
-) -> list[Document]:
-    url = (
-        f"{NA_API_URL}records/search?q={search_parameters}&limit={result_limit}"
-        "&levelOfDescription=item"
-    )
-    json_response = json.loads(requests.get(url, headers=HEADERS).text)
-    doc_list = get_docs_from_json_response(json_response)
-    return doc_list
-
-
-def get_doc_from_na(naId: int) -> Document:
-    url = f"{NA_API_URL}records/search?naId={naId}"
-    json_response = json.loads(requests.get(url, headers=HEADERS).text)
-    doc = get_docs_from_json_response(json_response)[0]
-    return doc
-
-
-def get_raw_na_url(url: str) -> requests.Response:
-    return requests.get(url, headers=HEADERS)
-
-
-def get_pdf_from_na(url: str):
-    pdf = get_raw_na_url(url).content
-    return pdf
+def swap_spaces_for_plus(params: str) -> str:
+    params.replace(' ', '+')
+    if params[len(params) - 1] == '+':
+        params = params[:-1]
+    return params
 
 
 def get_docs_from_json_response(

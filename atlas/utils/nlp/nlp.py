@@ -1,5 +1,4 @@
 import io
-import os
 import PyPDF2
 from ibm_watson import NaturalLanguageUnderstandingV1
 from ibm_cloud_sdk_core.authenticators import IAMAuthenticator
@@ -10,11 +9,8 @@ from ibm_watson.natural_language_understanding_v1 import (
     ConceptsOptions,
     KeywordsOptions,
 )
-
-NLP_API_KEY = str(os.getenv("NLP_API_KEY"))
-NLP_API_URL = "https://api.us-south.natural-language-understanding.watson.cloud.ibm.com/instances/1645185e-ee50-492f-b1f3-5093f5094d51"
-
-print(f"National Archives API Key: {NLP_API_KEY}")
+from models import Document
+from .nlp_env import NLP_API_KEY, NLP_API_URL
 
 natural_language_understanding = NaturalLanguageUnderstandingV1(
     version="2022-04-07", authenticator=IAMAuthenticator(NLP_API_KEY)
@@ -68,3 +64,4 @@ def summarize_pdf(text: str):
         ).get_result()
         print(response)
     return None
+

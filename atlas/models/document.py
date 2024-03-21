@@ -2,6 +2,7 @@ import json
 from typing import Dict, List, Optional, Union
 import datetime
 from json import JSONEncoder
+from .digital_object import DigitalObject
 
 
 class Encoder(JSONEncoder):
@@ -21,7 +22,7 @@ class Document:
         filename: str = "",
         doc_type: str = "",
         date: datetime.datetime = datetime.datetime.now(),
-        digitalObjects: Optional[List[Dict[str, str]]] = None,
+        digitalObjects: Optional[List[DigitalObject]] = None,
     ):
         self.title = title
         self.naId = naId
@@ -54,7 +55,7 @@ class Document:
             "filename": self.filename,
             "doc_type": self.doc_type,
             "date": self.date,
-            "digitalObjects": self.digitalObjects,
+            "digitalObjects": [obj.to_dict() for obj in self.digitalObjects],
         }
 
     def to_json(self) -> str:
