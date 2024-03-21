@@ -23,7 +23,8 @@ def get_docs(search_params: str, result_limit: int = 20):
 
     # check db first
     query: dict[str, Any] = {}
-    docs_from_db = mongo_db.query_db(query)
+    # docs_from_db = mongo_db.query_db(query)
+    docs_from_db = []
     doc_list.extend(docs_from_db)
 
     # if there wasn't many from the db, get from the NA

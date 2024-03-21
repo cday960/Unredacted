@@ -4,8 +4,8 @@ class DigitalObject:
         filename: str,
         url: str,
         type: str,
-        description: str,
-        summary: str = None,
+        description: str = "Processing document...please check back later!",
+        summary: str = "Processing summary...please check back later!",
     ):
         self.filename = filename
         self.url = url
