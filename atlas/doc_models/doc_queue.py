@@ -1,6 +1,7 @@
 from .document import Document
 import threading
 
+
 class DocQueue:
     def __init__(self):
         self.docs: list[Document] = []
@@ -23,4 +24,3 @@ class DocQueue:
         """Return the number of items in the queue."""
         with self.lock:
             return len(self.docs)
-        

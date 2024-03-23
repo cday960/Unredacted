@@ -7,5 +7,20 @@ services:
       - ./django_app:/app
     ports:
       - "8000:8000"
+    networks:
+      - unredacted-net
+
+  atlas:
+    build: ./atlas
+    volumes:
+      - ./atlas:/app
+    ports:
+      - "5000:5000"
     env_file:
-      - ./django_app/.env
+      - ./atlas/.env
+    networks:
+      - unredacted-net
+
+networks:
+  unredacted-net:
+    driver: bridge

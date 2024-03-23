@@ -1,6 +1,7 @@
 import re
 from doc_models import Document, DigitalObject
 
+
 def valid_date_param(date: str) -> bool:
     date_pattern = "^\d{4}-\d{2}-\d{2}$"
     if re.match(date_pattern, date):
@@ -8,9 +9,10 @@ def valid_date_param(date: str) -> bool:
     else:
         return False
 
+
 def swap_spaces_for_plus(params: str) -> str:
-    params.replace(' ', '+')
-    if params[len(params) - 1] == '+':
+    params.replace(" ", "+")
+    if params[len(params) - 1] == "+":
         params = params[:-1]
     return params
 
@@ -38,7 +40,7 @@ def get_docs_from_na_json_response(
                         DigitalObject(
                             filename=obj.get("objectFilename"),
                             url=obj.get("objectUrl"),
-                            type=obj.get("objectType"),
+                            file_type=obj.get("objectType"),
                             description=obj.get("objectDescription"),
                             # summary would be none
                         )

@@ -1,110 +1,103 @@
+import requests
 from django.shortcuts import render
-from django.http import HttpRequest, HttpResponse, FileResponse
+from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
 from django.views.decorators.http import require_GET
 from django.views.decorators.http import require_POST
-from .models import PageInfo, PageContext
 from django_htmx.middleware import HtmxDetails
 
-from doc_models import Document
-from backend import logic_controller as lc
+from .models import Document, DigitalObject
+from .atlas_connector import get_recent_docs, get_search_results, get_document, get_pdf 
 
 
-page_info: PageInfo = PageInfo(
-    render="landing_page.html",
-    context=PageContext(test="Initial landing", title="Welcome to Unredacted"),
-    avoid_switch={"landing_page.html": "home_page.html"}
-)
+ATLAS_URLS: dict[str, str] = {
+    "process_naid": "http://127.0.0.1:5000/atlas/process",
+    "search_docs": "http://127.0.0.1:5000/atlas/query",
+    'recent_docs': "http://127.0.0.1:5000/atlas/recent",
+    'pdf': "http://127.0.0.1:5000/atlas/pdf",
+}
+ATLAS_HEADERS = {"Content-Type": "application/json"}
 
 
 class HtmxHttpRequest(HttpRequest):
     htmx: HtmxDetails
 
 
+@require_GET
 def get_home_index(request: HtmxHttpRequest) -> HttpResponse:
     print(request.htmx.trigger)
-    global page_info
-    recent_docs = lc.get_recent_docs(num_docs=5)
-    if request.htmx.trigger == "home_page_button":
-        page_info.set_render_context(
-            render="home_page.html",
-            context=PageContext(test="Home Page Switch", title="Home", data={'recent_docs': recent_docs}),
-        )
-    else:
-        page_info.set_render_context(
-            render="landing_page.html",
-            context=PageContext(test="Initial landing", title="Welcome to Unredacted", data={'recent_docs': recent_docs}),
-        )
-        page_info.render = "landing_page.html"
-    return render(request, *page_info.get_render_context_dict())
+    recent_docs: list[Document] = get_recent_docs(5)
+    template = "home_page.html"
+    context = {"test": "Home page switch", "data": {"recent_docs": recent_docs}}
+
+    return render(request, template, context=context)
 
 
+@require_GET
 def get_search_index(request: HtmxHttpRequest) -> HttpResponse:
     print(request.htmx.trigger)
-    global page_info
-    page_info.set_render_context(
-        render="search_page.html",
-        context=PageContext(test="Search Page Switch", title="Search"),
+    return render(
+        request, "search_page.html", context={"test": "Search Page Switch"}
     )
-    return render(request, *page_info.get_render_context_dict())
 
 
+@require_GET
 def get_about_index(request: HtmxHttpRequest) -> HttpResponse:
     print(request.htmx.trigger)
-    global page_info
-    page_info.set_render_context(
-        render="about_page.html",
-        context=PageContext(test="About Page Switch", title="About Unredacted"),
+    return render(
+        request, "about_page.html", context={"test": "About page switch"}
     )
-    return render(request, *page_info.get_render_context_dict())
 
+
+@require_GET
 def get_back_index(request: HtmxHttpRequest) -> HttpResponse:
-    print(request.htmx.trigger)
-    global page_info
-    page_info.revert()
-    return render(request, *page_info.get_render_context_dict())
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
 # searching for a document
 @require_POST
 def search_results_index(request: HtmxHttpRequest) -> HttpResponse:
     print(request.htmx.trigger)
-    global page_info
-    search_query = str(request.POST.get("search_query"))
+
+    # filter query...maybe move somewhere else?
+    search_query = str(request.POST.get("search_query")).replace(' ', '+')
+
     if len(search_query) > 1:
-        search_results = lc.get_docs(search_query)
-        page_info.set_render_context(
-            render="search_results.html",
-            context=PageContext(
-                test="document search results",
-                title=f"Search results for '{search_query}'",
-                data={
+
+        # get the results from atlas
+        search_results: list[Document] = get_search_results(search_query)
+
+        return render(
+            request,
+            "search_results.html",
+            context={
+                "test": "document search results",
+                "data": {
                     "search_results": search_results,
                     "search_query": search_query,
                 },
-            ),
+            },
         )
-    return render(request, *page_info.get_render_context_dict())
+    else:
+        return get_search_index(request)
 
 
 @require_GET
 def display_doc_index(request: HtmxHttpRequest, naId: int) -> HttpResponse:
     print(request.htmx.trigger)
-    global page_info
-    document: Document = lc.get_doc(naId)
-    page_info.set_render_context(
-        render="document_page.html",
-        context=PageContext(
-            test=f"Document load: naId = {document.naId}",
-            title=f"{document.title}",
-            data={"document": document},
-        ),
+    document: Document = get_document(naId)
+    return render(
+        request,
+        "document_page.html",
+        context={
+            "test": f"Document load: naId = {document.naId}",
+            "data": {"document": document.to_dict()},
+        },
     )
-    return render(request, *page_info.get_render_context_dict())
 
 
 @require_GET
 def show_pdf(request: HtmxHttpRequest, url: str) -> HttpResponse:
-    pdf_content = lc.get_pdf(url)
+    pdf_content = get_pdf(url)
     response = HttpResponse(pdf_content, content_type="application/pdf")
     response["Content-Disposition"] = 'inline; filename="document.pdf"'
     return response
@@ -112,7 +105,7 @@ def show_pdf(request: HtmxHttpRequest, url: str) -> HttpResponse:
 
 @require_GET
 def download_pdf(request: HtmxHttpRequest, url: str) -> HttpResponse:
-    pdf_content = lc.get_pdf(url)
+    pdf_content = get_pdf(url)
     response = HttpResponse(pdf_content, content_type="application/pdf")
     response["Content-Disposition"] = 'attachment; filename="document.pdf"'
     return response

@@ -1,7 +1,7 @@
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
 
-from models import Document, DigitalObject
+from doc_models import Document, DigitalObject
 from typing import Any
 
 from .db_env import MONGO_URI, DB_NAME, COLLECTION_NAME
@@ -12,7 +12,7 @@ client = MongoClient(MONGO_URI, server_api=ServerApi("1"))
 
 # Send a ping to confirm a successful connection
 client.admin.command("ping")
-print("Pinged your deployment. You successfully connected to MongoDB!")
+print("Pinged deployment. Successfully connected to MongoDB.")
 
 # Access the database
 db = client[DB_NAME]
@@ -38,9 +38,9 @@ def get_doc(naId: int) -> Document:
 
 def get_recent_docs(num_docs: int = 10) -> list[Document]:
     recent_docs = []
-    results = collection.find().sort('_id', -1).limit(num_docs)
+    results = collection.find().sort("_id", -1).limit(num_docs)
     for result in results:
-        recent_docs.append(fill_doc_from_db_json(result))
+        recent_docs.append(fill_doc_from_db_json(result).to_dict())
     return recent_docs
 
 
@@ -65,3 +65,28 @@ def insert_doc(doc: Document) -> bool:
         return True
     else:
         return False
+    
+def keyword_search(keywords: list[str]) -> list[Document]:
+    keyword_results = []
+    pipeline = [
+        {
+            "$match": {
+                "keywords.text": {"$in": keywords}
+            }
+        },
+        {
+            "$group": {
+                "_id": "$_id",
+                "relevance_score": {"$sum": "$keywords.count"}
+            }
+        },
+        {
+            "$sort": {"relevance_score": -1}
+        }
+    ]
+    results = collection.aggregate(pipeline)
+    print(results)
+    for result in results:
+        keyword_results.append(fill_doc_from_db_json(result).to_dict())
+    return keyword_results
+

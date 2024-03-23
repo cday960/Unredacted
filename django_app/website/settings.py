@@ -25,7 +25,7 @@ SECRET_KEY = "django-insecure-ns=f3eob^gvykx^in%qrfuckll6t$4uj)ei#ydfis!4*0k-=7a
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [".awsapprunner.com", "localhost", "127.0.0.1"]
 
 
 # Application definition
