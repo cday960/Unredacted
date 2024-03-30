@@ -7,6 +7,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 ATLAS_URL = str(os.getenv("ATLAS_URL"))
+print(f"Atlas URL: {ATLAS_URL}")
 
 ATLAS_HEADERS = {"Content-Type": "application/json"}
 
@@ -24,8 +25,6 @@ def get_from_atlas(url: str, arg: str = None) -> requests.Response:
     
 
 def get_recent_docs(num_docs: int = 5) -> list[Document]:
-    print(ATLAS_URL)
-    print("HERE!")
     atlas_response = get_from_atlas(f"{ATLAS_URL}/recent", num_docs).json()
     recent_docs = atlas_response['data']
     return recent_docs
