@@ -85,6 +85,7 @@ def search_results_index(request: HtmxHttpRequest) -> HttpResponse:
 def display_doc_index(request: HtmxHttpRequest, naId: int) -> HttpResponse:
     print(request.htmx.trigger)
     document: Document = get_document(naId)
+    print(document.to_dict())
     return render(
         request,
         "document_page.html",

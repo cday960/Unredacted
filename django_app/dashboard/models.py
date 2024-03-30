@@ -21,11 +21,8 @@ class DigitalObject:
             self.filename = raw_json["filename"]
             self.url = raw_json["url"]
             self.file_type = raw_json["file_type"]
-            try:
-                self.description = raw_json.get("description")
-            except KeyError:
-                self.description = ""
-            self.summary = ""
+            self.description = raw_json["description"]
+            self.summary = raw_json["summary"]
         else:
             self.filename = filename
             self.url = url
@@ -57,7 +54,6 @@ class Document:
         raw_json: Any = None,
     ):
         if raw_json is not None:
-            print(raw_json)
             self.title = raw_json["title"]
             self.naId = raw_json["naId"]
             self.filename = raw_json["filename"]
