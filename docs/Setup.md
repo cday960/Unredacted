@@ -34,6 +34,7 @@ sh start.sh
 Create the python virtual env and install packages
 ```bash
 cd atlas
+cd atlas
 virtualenv --clear .venv
 source .venv/bin/activate 
 pip install -r requirements.txt
@@ -47,5 +48,6 @@ export MONGO_URI=<URI>
 
 ## Start server
 ```bash
+flask app run
 flask app run
 ```
