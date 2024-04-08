@@ -53,9 +53,9 @@ Functions the same as the previous endpoint except you can add a `result_limit` 
 }
 ```
 
-## /webapp/records/id/\<string:naId\>
+## /webapp/record/id/\<string:naId\>
 #### GET Request
-The `naId` is an ID that is unique to one object of each record type. If trying to retrieve the document from above (id: 1667751), the URL would be `http://127.0.0.1:5000/webapp/records/id/1667751`. By default it only returns the top result.
+The `naId` is an ID that is unique to one object of each record type. If trying to retrieve the document from above (id: 1667751), the URL would be `http://127.0.0.1:5000/webapp/record/id/1667751`. By default it only returns the top result.
 
 #### Example Response
 ```

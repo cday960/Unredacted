@@ -1,5 +1,10 @@
+# Note about MongoDB
+For the application to work properly you need your IP address added to MongoDB site. It will not run at all without this connection.
+If you have questions about how to do that ask Luke or Landon
+
+
 # Docker setup
-Instead of having to setup each component individually, the docker-compose command from root in the project directory will start both the website and api for you.
+Make sure to load atlas .env file with the appropriate API keys
 ```bash
 docker-compose up --build
 ```
@@ -10,7 +15,6 @@ docker-compose up --build
 ## Virtualenv setup 
 Create the python virtual env and install packages
 ```bash
-cd django_app
 virtualenv --clear .venv
 source .venv/bin/activate 
 pip install -r requirements.txt
@@ -31,13 +35,14 @@ sh start.sh
 ## Virtualenv setup 
 Create the python virtual env and install packages
 ```bash
-cd django_app
+cd atlas
 virtualenv --clear .venv
 source .venv/bin/activate 
 pip install -r requirements.txt
 ```
+Then export the API keys and mongo URI. Check discord for those values
 
 ## Start server
 ```bash
-python3 src/flask_api/app.py
+flask app run
 ```

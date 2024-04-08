@@ -1,26 +1,21 @@
-# Use an official Python runtime as a parent image
-FROM python:3.9
+FROM python:3.9.19-slim
 
-# Set environment variables
-ENV PYTHONDONTWRITEBYTECODE 1
-ENV PYTHONUNBUFFERED 1
+# ENV PYTHONDONTWRITEBYTECODE 1
+# ENV PYTHONUNBUFFERED 1
 
-# Set the working directory in the container
+RUN apt-get clean
+RUN apt-get update
+# RUN apt-get -y upgrade
+RUN apt-get install -y npm
+
 WORKDIR /app
 
-# Copy the application code into the container
 ADD . /app/
 
-# Install Node.js
-RUN apt-get update && apt-get install -y nodejs npm
+RUN apt-get install -y npm
+RUN pip3 install -r requirements.txt
+RUN python3 manage.py tailwind install
 
-# Install any needed packages specified in requirements.txt
-RUN pip install --no-cache-dir -r requirements.txt
-
-# Expose port 8000 to allow communication to/from server
 EXPOSE 8000
 
-RUN python manage.py tailwind install
-
-# Command to run the Django development server
 CMD ["sh", "start.sh"]

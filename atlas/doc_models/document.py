@@ -1,43 +1,16 @@
-# Create your models here.
-
-from typing import Any
+import json
 from typing import Any, Optional, Union, List, Dict
 import datetime
 from json import JSONEncoder
-import json
+from .digital_object import DigitalObject
+from .keywords import Keywords
 
 
-class DigitalObject:
-    def __init__(
-        self,
-        filename: str = "",
-        url: str = "",
-        file_type: str = "",
-        description: str = "No descripition was provided.",
-        summary: str = "Summary still processing. Please check back later!",
-        raw_json: Any = None,
-    ):
-        if raw_json is not None:
-            self.filename = raw_json["filename"]
-            self.url = raw_json["url"]
-            self.file_type = raw_json["file_type"]
-            self.description = raw_json["description"]
-            self.summary = raw_json["summary"]
-        else:
-            self.filename = filename
-            self.url = url
-            self.file_type = file_type
-            self.description = description
-            self.summary = summary
-
-    def to_dict(self):
-        return {
-            "filename": self.filename,
-            "url": self.url,
-            "file_type": self.file_type,
-            "description": self.description,
-            "summary": self.summary,
-        }
+# class Encoder(JSONEncoder):
+#     def default(self, o):
+#         if isinstance(o, Document):
+#             return o.to_dict()
+#         return JSONEncoder.default(self, o)
 
 
 class Document:
@@ -51,8 +24,10 @@ class Document:
         doc_type: str = "",
         date: datetime.datetime = datetime.datetime.now(),
         digitalObjects: Optional[List[DigitalObject]] = None,
+        keywords: Optional[List[Keywords]] = None,
         raw_json: Any = None,
     ):
+        
         if raw_json is not None:
             self.title = raw_json["title"]
             self.naId = raw_json["naId"]
@@ -60,8 +35,14 @@ class Document:
             self.doc_type = raw_json["doc_type"]
             self.date = raw_json["date"]
             self.digitalObjects = []
-            for obj in raw_json["digitalObjects"]:
-                self.digitalObjects.append(DigitalObject(raw_json=obj))
+            self.keywords = []
+            try:
+                for obj in raw_json["digitalObjects"]:
+                    self.digitalObjects.append(DigitalObject(raw_json=obj))
+                for key in raw_json['keywords']:
+                    self.keywords.append(Keywords(raw_json=key))
+            except KeyError:
+                pass
         else:
             self.title = title
             self.naId = naId
@@ -71,6 +52,7 @@ class Document:
             self.doc_type = doc_type
             self.date = date
             self.digitalObjects = digitalObjects if digitalObjects is not None else []
+            self.keywords = [] if keywords is None else keywords
 
     # debugging func to see info ab document
     def __repr__(self) -> str:
@@ -95,4 +77,5 @@ class Document:
             "doc_type": self.doc_type,
             "date": self.date,
             "digitalObjects": [obj.to_dict() for obj in self.digitalObjects],
+            "keywords": [key.to_dict() for key in self.keywords]
         }

@@ -7,10 +7,20 @@ services:
       - ./django_app:/app
     ports:
       - "8000:8000"
+    networks:
+      - unredacted-net
 
-  flask_api:
-    build: ./flask_api
+  atlas:
+    build: ./atlas
     volumes:
-      - ./flask_api:/app
+      - ./atlas:/app
     ports:
       - "5000:5000"
+    env_file:
+      - ./atlas/.env
+    networks:
+      - unredacted-net
+
+networks:
+  unredacted-net:
+    driver: bridge

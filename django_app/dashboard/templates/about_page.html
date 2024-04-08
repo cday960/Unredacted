@@ -1,0 +1,88 @@
+{% extends "theme/base_page.html" %}
+{% block header_title %} About {% endblock %}
+{% block page_content %}
+{% load static %}
+
+<!-- <h1>{{ test }}</h1> -->
+
+<div class="lg:col-span-2 lg:col-start-1 lg:row-start-1 lg:mx-auto lg:grid lg:w-full lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8">
+    <div class="lg:pr-4">
+    <div class="lg:max-w-lg">
+        <p class="text-base font-semibold leading-7 text-indigo-600">Let the truth be known</p>
+        <h1 class="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">A better way to find declassified documents</h1>
+        <p class="mt-6 text-xl leading-8 text-gray-700"></p>
+    </div>
+    </div>
+</div>
+
+<div class="lg:col-span-2 lg:col-start-1 lg:row-start-2 lg:mx-auto lg:grid lg:w-full lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8">
+    <div class="lg:pr-4">
+    <div class="max-w-xl text-base leading-7 text-gray-700 lg:max-w-lg">
+        <p>Do you want to know more about a topic in American history? Is searching through the National Archives a headache?</p>
+        <p class="mt-8 text-2xl font-bold tracking-tight text-gray-900">
+          Then you're in the right place. 
+        </p>
+        <p class="">
+          Unredacted allows you to quickly find declassified documents, read summaries on articles, and find the information you're looking for faster. 
+          Unredacted was started as a capstone project at the University of Missouri, and is currently maintained by four senior computer science students.
+        </p>
+    </div>
+    </div>
+</div>
+
+<div class="bg-white py-24 sm:py-32">
+    <div class="mx-auto grid max-w-7xl gap-x-8 gap-y-20 px-6 lg:px-8 xl:grid-cols-3">
+      <div class="max-w-2xl">
+        <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Meet the Unredacted team</h2>
+        <p class="mt-6 text-lg leading-8 text-gray-600"></p>
+      </div>
+      <ul role="list" class="grid gap-x-8 gap-y-12 sm:grid-cols-2 sm:gap-y-16 xl:col-span-2">
+        <li>
+          <div class="flex items-center gap-x-6">
+            <img class="h-16 w-16 rounded-full" src="{% static 'images/ls_headshot.jpg' %}" alt="">
+            <div>
+              <h3 class="text-base font-semibold">Luke Schaefer</h3>
+              <p class="text-sm font-semibold">Frontend Developer</p>
+            </div>
+          </div>
+        </li>
+
+        <li>
+            <div class="flex items-center gap-x-6">
+              <img class="h-16 w-16 rounded-full" src="{% static 'images/cd_headshot.jpg' %}" alt="">
+              <div>
+                <h3 class="text-base font-semibold">Cam Day</h3>
+                <p class="text-sm font-semibold">Backend Developer</p>
+              </div>
+            </div>
+          </li>
+
+
+          <li>
+            <div class="flex items-center gap-x-6">
+              <img class="h-16 w-16 rounded-full" src="{% static 'images/rs_headshot.jpg' %}" alt="">
+              <div>
+                <h3 class="text-base font-semibold">Ryan Sellers</h3>
+                <p class="text-sm font-semibold">NLP Architect</p>
+              </div>
+            </div>
+          </li>
+
+
+          <li>
+            <div class="flex items-center gap-x-6">
+              <img class="h-16 w-16 rounded-full" src="{% static 'images/lv_headshot.png' %}" alt="">
+              <div>
+                <h3 class="text-base font-semibold">Landon Vowels</h3>
+                <p class="text-sm font-semibold">Database Admin</p>
+              </div>
+            </div>
+          </li>
+  
+        <!-- More people... -->
+      </ul>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
