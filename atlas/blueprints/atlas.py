@@ -22,7 +22,7 @@ atlas = Blueprint("atlas", __name__, url_prefix="/atlas")
 #     return jsonify({"data": doc.to_dict()}), 200
 
 
-@atlas.route("/process/<int:naId>", methods=["GET"])
+@atlas.route("/record/<int:naId>", methods=["GET"])
 def process_doc_naid(naId: int):
 
     if naId is None:
@@ -42,8 +42,8 @@ def process_doc_naid(naId: int):
     return jsonify({"data": doc.to_dict()}), 200
 
 
-@atlas.route("/query/<string:search_parameters>?<int:result_limit>", methods=["GET"])
-@atlas.route("/query/<string:search_parameters>", methods=["GET"])
+@atlas.route("/search/<string:search_parameters>?<int:result_limit>", methods=["GET"])
+@atlas.route("/search/<string:search_parameters>", methods=["GET"])
 def search_docs(search_parameters: str, result_limit: int = 20):
     """
     127.0.0.1:5000/webapp/search/<search_parameters>

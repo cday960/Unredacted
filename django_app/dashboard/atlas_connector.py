@@ -41,13 +41,13 @@ def get_search_results(query: str) -> list[Document]:
             valid_query = True
 
     if valid_query:
-        search_results = json.loads(get_from_atlas(f"{ATLAS_URL}/query", arg = query).text)['data']
+        search_results = json.loads(get_from_atlas(f"{ATLAS_URL}/search", arg = query).text)['data']
 
     return search_results
 
 
 def get_document(naId: int) -> Document:
-    doc = Document(raw_json=get_from_atlas(f"{ATLAS_URL}/process", arg = naId).json()['data'])
+    doc = Document(raw_json=get_from_atlas(f"{ATLAS_URL}/record", arg = naId).json()['data'])
     return doc
 
 

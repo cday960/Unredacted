@@ -1,6 +1,9 @@
 .DS_Store
 .vscode
 
+# Server logs
+nohup.out
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
