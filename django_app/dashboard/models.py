@@ -96,3 +96,16 @@ class Document:
             "date": self.date,
             "digitalObjects": [obj.to_dict() for obj in self.digitalObjects],
         }
+    
+
+class ApiEndpoint:
+    
+    def __init__(self, endpoint: str, info: str):
+        self.endpoint = endpoint
+        self.info = info
+
+    def to_dict(self) -> Dict[str, str]:
+        return {
+            "endpoint": self.endpoint,
+            "info": self.info
+        }
