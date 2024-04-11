@@ -7,6 +7,7 @@ from django_htmx.middleware import HtmxDetails
 
 from .models import Document, DigitalObject
 from .atlas_connector import get_recent_docs, get_search_results, get_document, get_pdf 
+from .api_reader import get_endpoint_html
 
 
 ATLAS_URLS: dict[str, str] = {
@@ -38,6 +39,15 @@ def get_search_index(request: HtmxHttpRequest) -> HttpResponse:
     return render(
         request, "search_page.html", context={"test": "Search Page Switch"}
     )
+
+@require_GET
+def get_api_info_index(request: HtmxHttpRequest) -> HttpResponse:
+    print(request.htmx.trigger)
+    markdown_html = get_endpoint_html()
+    return render(
+        request, "api_info.html", context={"test": "API Info Page Switch", "html_content": markdown_html}
+    )
+
 
 
 @require_GET
