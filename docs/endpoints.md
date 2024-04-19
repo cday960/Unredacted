@@ -1,17 +1,20 @@
 # Endpoints
-## /atlas/search/\<string:search_parameters\>
+
+# Search and Recent
+## /atlas/search/string:search_parameters
 ### GET
 Search parameters is a string of words separated by + symbols. So to search "john f kennedy", the URL would be `http://unredactedonline.com/atlas/search/john+f+kennedy`
 
-## /atlas/search/\<string:search_parameters\>/\<int:result_limit\>
+## /atlas/search/string:search_parameters/int:result_limit
 ### GET
 Functions the same as the previous endpoint except you can add a `result_limit` parameter that limits the number of results that are returned (surprise!). So to limit the john f kennedy search to 10 results, the url would be `http://unredactedonline.com/atlas/search/john+f+kennedy/10`
 
-## /atlas/recent/\<int:result_limit\>
+## /atlas/recent/int:result_limit
 ### GET
-Functions similiar to the the previous endpoint `http://unredactedonline.com/atlas/reent/5` but simly pulls the most recently added documents from the database
+Functions similiar to the the previous endpoint `http://unredactedonline.com/atlas/recent/5` but simply pulls the most recently processed documents
 
-#### Example Response
+
+## Example Response
 ```
 {
   "data": [
@@ -58,11 +61,12 @@ Functions similiar to the the previous endpoint `http://unredactedonline.com/atl
 }
 ```
 
-## /atlas/record/id/\<int:naId\>
+# Specific Document
+## /atlas/record/id/int:naId
 ### GET
 The `naId` is an ID that is unique to one object of each record type. If trying to retrieve the document from above (id: 1667751), the URL would be `http://unredactedonline.com/atlas/record/id/1667751`. By default it only returns the top result.
 
-#### Example Response
+## Example Response
 ```
 {
   "data": {
