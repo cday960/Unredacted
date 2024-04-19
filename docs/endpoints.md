@@ -13,6 +13,7 @@ Functions the same as the previous endpoint except you can add a `result_limit` 
 ### GET
 Functions similiar to the the previous endpoint `http://unredactedonline.com/atlas/recent/5` but simply pulls the most recently processed documents
 
+
 ## Example Response
 ```
 {
