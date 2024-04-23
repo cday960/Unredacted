@@ -1,6 +1,7 @@
 # Endpoints
 
 # Search and Recent
+
 ## /atlas/search/string:search_parameters?int:result_limit&string:start_year&string:end_year
 ### GET
 Search parameters is a string of words separated by + symbols. So to search "john f kennedy", the URL would be `http://unredactedonline.com/atlas/search/john+f+kennedy`
@@ -8,7 +9,6 @@ Search parameters is a string of words separated by + symbols. So to search "joh
 ## /atlas/recent/int:result_limit
 ### GET
 Functions similiar to the the previous endpoint `http://unredactedonline.com/atlas/recent/5` but simply pulls the most recently processed documents
-
 
 ## Example Response
 ```
