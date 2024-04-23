@@ -89,7 +89,7 @@ def nlp_analysis(text: str):
                 summarization=SummarizationOptions(limit=10),
             ),
         ).get_result()
-        print(json.dumps(response, indent=2))
+        # print(json.dumps(response, indent=2))
     return response
 
 
@@ -103,4 +103,3 @@ def process_doc(doc: Document) -> Document:
             digitalObject.summary = nlp_stuff["summarization"]["text"]
     mongo_db.insert_doc(doc)
     return doc
-

@@ -49,7 +49,7 @@ class Document:
         # sort: Optional[Tuple[float, str]] = None,
         filename: str = "",
         doc_type: str = "",
-        date: datetime.datetime = datetime.datetime.now(),
+        # date: datetime.datetime = datetime.datetime.now(),
         digitalObjects: Optional[List[DigitalObject]] = None,
         raw_json: Any = None,
     ):
@@ -58,7 +58,7 @@ class Document:
             self.naId = raw_json["naId"]
             self.filename = raw_json["filename"]
             self.doc_type = raw_json["doc_type"]
-            self.date = raw_json["date"]
+            # self.date = raw_json["date"]
             self.digitalObjects = []
             for obj in raw_json["digitalObjects"]:
                 self.digitalObjects.append(DigitalObject(raw_json=obj))
@@ -69,7 +69,7 @@ class Document:
             # self.sort = sort
             self.filename = filename
             self.doc_type = doc_type
-            self.date = date
+            # self.date = date
             self.digitalObjects = digitalObjects if digitalObjects is not None else []
 
     # debugging func to see info ab document
@@ -87,25 +87,21 @@ class Document:
     # converts obj to dict
     def to_dict(
         self,
-    ) -> Dict[str, Union[str, int, datetime.datetime, Optional[List[Dict[str, str]]]]]:
+    ) -> Dict[str, Union[str, int, Optional[List[Dict[str, str]]]]]:
         return {
             "title": self.title,
             "naId": self.naId,
             "filename": self.filename,
             "doc_type": self.doc_type,
-            "date": self.date,
+            # "date": self.date,
             "digitalObjects": [obj.to_dict() for obj in self.digitalObjects],
         }
-    
+
 
 class ApiEndpoint:
-    
     def __init__(self, endpoint: str, info: str):
         self.endpoint = endpoint
         self.info = info
 
     def to_dict(self) -> Dict[str, str]:
-        return {
-            "endpoint": self.endpoint,
-            "info": self.info
-        }
+        return {"endpoint": self.endpoint, "info": self.info}

@@ -3,7 +3,7 @@ from doc_models import Document, DigitalObject
 
 
 def valid_date_param(date: str) -> bool:
-    date_pattern = "^\d{4}-\d{2}-\d{2}$"
+    date_pattern = "^\d{4}$"
     if re.match(date_pattern, date):
         return True
     else:
@@ -28,7 +28,7 @@ def get_docs_from_na_json_response(
             uuid=result["_source"]["metadata"]["uuid"],
             filename=result["_source"]["metadata"]["fileName"],
             doc_type=result["_type"],
-            date=result["_source"]["metadata"]["ingestTime"],
+            # date=result["_source"]["metadata"]["ingestTime"],
         )
         # Some records have no digitalObjects
         try:
