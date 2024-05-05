@@ -11,6 +11,7 @@ import json
 import time
 from ibm_watson import NaturalLanguageUnderstandingV1
 from ibm_cloud_sdk_core.authenticators import IAMAuthenticator
+from openai import OpenAI
 from ibm_watson.natural_language_understanding_v1 import (
     Features,
     CategoriesOptions,
@@ -20,14 +21,21 @@ from ibm_watson.natural_language_understanding_v1 import (
     EntitiesOptions,
 )
 
+
+
 load_dotenv()
 
+# Watson NLP API Keys
 NLP_API_KEY = str(os.getenv("NLP_API_KEY"))
+OPENAI_API_KEY = str(os.getenv("OPENAI_API_KEY"))
 NLP_API_URL = "https://api.us-south.natural-language-understanding.watson.cloud.ibm.com/instances/1645185e-ee50-492f-b1f3-5093f5094d51"
+
+# client for gpt analysis
+client = OpenAI(api_key=OPENAI_API_KEY)
 
 print(f"Watson API Key: {NLP_API_KEY}")
 
-
+# NLU instantiation
 natural_language_understanding = NaturalLanguageUnderstandingV1(
     version="2022-04-07", authenticator=IAMAuthenticator(NLP_API_KEY)
 )
@@ -92,15 +100,30 @@ def nlp_analysis(text: str):
         print(json.dumps(response, indent=2))
     return response
 
+def gpt_analysis(text: str):
+    response = None
+    completion = client.chat.completions.create(
+        model="gpt-3.5-turbo",
+        messages=[
+            {"role": "system", "content": "You are a document analysis assistant, skilled in summarizing complex government documents in a succinct and accurate manner."},
+            {"role": "user", "content": f'Summarize the following text in 2 paragraphs or less, at the top of the summary include a one phrase title for the provided text: {text}'}
+        ]
+    )
+    print(completion.choices[0].message)
+    response = completion.choices[0].message
+    return response
+
 
 def process_doc(doc: Document) -> Document:
     for digitalObject in doc.digitalObjects:
         pdf_bytes = na_api.get_raw_na_url(digitalObject.url).content
         extracted_text = extract_pdf_text(pdf_bytes)
         nlp_stuff = nlp_analysis(extracted_text)
-        if nlp_stuff is not None:
+        gpt_stuff = gpt_analysis(extracted_text)
+
+        if nlp_stuff is not None and gpt_stuff is not None:
             doc.keywords = [Keywords(raw_json=key) for key in nlp_stuff["keywords"]]
-            digitalObject.summary = nlp_stuff["summarization"]["text"]
+            digitalObject.summary = gpt_stuff
+
     mongo_db.insert_doc(doc)
     return doc
-
