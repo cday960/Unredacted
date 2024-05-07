@@ -26,18 +26,18 @@ from ibm_watson.natural_language_understanding_v1 import (
 load_dotenv()
 
 # Watson NLP API Keys
-NLP_API_KEY = str(os.getenv("NLP_API_KEY"))
+IBM_API_KEY = str(os.getenv("IBM_API_KEY"))
 OPENAI_API_KEY = str(os.getenv("OPENAI_API_KEY"))
 NLP_API_URL = "https://api.us-south.natural-language-understanding.watson.cloud.ibm.com/instances/1645185e-ee50-492f-b1f3-5093f5094d51"
 
-# client for gpt analysis
-client = OpenAI(api_key=OPENAI_API_KEY)
+# gpt_client for gpt analysis
+gpt_client = OpenAI(api_key=OPENAI_API_KEY)
 
-print(f"Watson API Key: {NLP_API_KEY}")
+print(f"Watson API Key: {IBM_API_KEY}")
 
 # NLU instantiation
 natural_language_understanding = NaturalLanguageUnderstandingV1(
-    version="2022-04-07", authenticator=IAMAuthenticator(NLP_API_KEY)
+    version="2022-04-07", authenticator=IAMAuthenticator(IBM_API_KEY)
 )
 natural_language_understanding.set_service_url(NLP_API_URL)
 
@@ -102,7 +102,7 @@ def nlp_analysis(text: str):
 
 def gpt_analysis(text: str):
     response = None
-    completion = client.chat.completions.create(
+    completion = gpt_client.chat.completions.create(
         model="gpt-3.5-turbo",
         messages=[
             {"role": "system", "content": "You are a document analysis assistant, skilled in summarizing complex government documents in a succinct and accurate manner."},
@@ -124,6 +124,9 @@ def process_doc(doc: Document) -> Document:
         if nlp_stuff is not None and gpt_stuff is not None:
             doc.keywords = [Keywords(raw_json=key) for key in nlp_stuff["keywords"]]
             digitalObject.summary = gpt_stuff
+        else:
+            doc.keywords = []
+            digitalObject.summary = "Unable to summarize document."
 
     mongo_db.insert_doc(doc)
     return doc

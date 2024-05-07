@@ -43,8 +43,9 @@ pip install -r requirements.txt
 ## Export the all environment variables. Check discord for these variables
 ```bash
 export NA_API_KEY=<KEY>
-export NLP_API_KEY=<KEY>
+export IBM_API_KEY=<KEY>
 export MONGO_URI=<URI>
+export OPENAI_API_KEY=<KEY>
 ```
 
 ## Start server

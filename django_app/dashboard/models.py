@@ -3,8 +3,6 @@
 from typing import Any
 from typing import Any, Optional, Union, List, Dict
 import datetime
-from json import JSONEncoder
-import json
 
 
 class DigitalObject:
@@ -49,7 +47,7 @@ class Document:
         # sort: Optional[Tuple[float, str]] = None,
         filename: str = "",
         doc_type: str = "",
-        # date: datetime.datetime = datetime.datetime.now(),
+        date: datetime.datetime = datetime.datetime.now(),
         digitalObjects: Optional[List[DigitalObject]] = None,
         raw_json: Any = None,
     ):
@@ -58,7 +56,7 @@ class Document:
             self.naId = raw_json["naId"]
             self.filename = raw_json["filename"]
             self.doc_type = raw_json["doc_type"]
-            # self.date = raw_json["date"]
+            self.date = raw_json["date"]
             self.digitalObjects = []
             for obj in raw_json["digitalObjects"]:
                 self.digitalObjects.append(DigitalObject(raw_json=obj))
@@ -69,7 +67,7 @@ class Document:
             # self.sort = sort
             self.filename = filename
             self.doc_type = doc_type
-            # self.date = date
+            self.date = date
             self.digitalObjects = digitalObjects if digitalObjects is not None else []
 
     # debugging func to see info ab document
@@ -93,7 +91,7 @@ class Document:
             "naId": self.naId,
             "filename": self.filename,
             "doc_type": self.doc_type,
-            # "date": self.date,
+            "date": self.date,
             "digitalObjects": [obj.to_dict() for obj in self.digitalObjects],
         }
 

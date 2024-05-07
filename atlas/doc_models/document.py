@@ -22,7 +22,7 @@ class Document:
         # sort: Optional[Tuple[float, str]] = None,
         filename: str = "",
         doc_type: str = "",
-        # date: datetime.datetime = datetime.datetime.now(),
+        date: datetime.datetime = datetime.datetime.now(),
         digitalObjects: Optional[List[DigitalObject]] = None,
         keywords: Optional[List[Keywords]] = None,
         raw_json: Any = None,
@@ -33,7 +33,7 @@ class Document:
             self.naId = raw_json["naId"]
             self.filename = raw_json["filename"]
             self.doc_type = raw_json["doc_type"]
-            # self.date = raw_json["date"]
+            self.date = raw_json["date"]
             self.digitalObjects = []
             self.keywords = []
             try:
@@ -50,7 +50,7 @@ class Document:
             # self.sort = sort
             self.filename = filename
             self.doc_type = doc_type
-            # self.date = date
+            self.date = date
             self.digitalObjects = digitalObjects if digitalObjects is not None else []
             self.keywords = [] if keywords is None else keywords
 
@@ -75,7 +75,7 @@ class Document:
             "naId": self.naId,
             "filename": self.filename,
             "doc_type": self.doc_type,
-            # "date": self.date,
+            "date": self.date,
             "digitalObjects": [obj.to_dict() for obj in self.digitalObjects],
             "keywords": [key.to_dict() for key in self.keywords],
         }
