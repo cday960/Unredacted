@@ -10,7 +10,7 @@ def fill_doc_from_db_json(db_json: dict[str, Any]) -> Document:
             naId=db_json["naId"],
             filename=db_json["filename"],
             doc_type=db_json["doc_type"],
-            date=db_json["date"],
+            # date=db_json["date"],
             digitalObjects=[
                 DigitalObject(
                     filename=obj["filename"],

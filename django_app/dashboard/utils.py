@@ -34,16 +34,16 @@ def get_recent_docs(num_docs: int = 10) -> list[Document]:
         recent_docs.append(Document(raw_json=result))
     return recent_docs
 
-''' 
+
+""" 
 Quick NA connector
-'''
+"""
 NA_API_URL = "https://catalog.archives.gov/api/v2"
 NA_API_KEY = str(os.getenv("NA_API_KEY"))
 NA_HEADERS = {"Content-Type": "application/json", "x-api-key": NA_API_KEY}
 
 print(f"National Archives API Key: {NA_API_KEY}")
 
+
 def get_raw_na_url(url: str) -> requests.Response:
     return requests.get(url, headers=NA_HEADERS)
-
-

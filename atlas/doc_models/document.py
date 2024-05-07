@@ -27,7 +27,7 @@ class Document:
         keywords: Optional[List[Keywords]] = None,
         raw_json: Any = None,
     ):
-        
+
         if raw_json is not None:
             self.title = raw_json["title"]
             self.naId = raw_json["naId"]
@@ -39,7 +39,7 @@ class Document:
             try:
                 for obj in raw_json["digitalObjects"]:
                     self.digitalObjects.append(DigitalObject(raw_json=obj))
-                for key in raw_json['keywords']:
+                for key in raw_json["keywords"]:
                     self.keywords.append(Keywords(raw_json=key))
             except KeyError:
                 pass
@@ -69,7 +69,7 @@ class Document:
     # converts obj to dict
     def to_dict(
         self,
-    ) -> Dict[str, Union[str, int, datetime.datetime, Optional[List[Dict[str, str]]]]]:
+    ) -> Dict[str, Union[str, int, Optional[List[Dict[str, str]]]]]:
         return {
             "title": self.title,
             "naId": self.naId,
@@ -77,5 +77,5 @@ class Document:
             "doc_type": self.doc_type,
             "date": self.date,
             "digitalObjects": [obj.to_dict() for obj in self.digitalObjects],
-            "keywords": [key.to_dict() for key in self.keywords]
+            "keywords": [key.to_dict() for key in self.keywords],
         }

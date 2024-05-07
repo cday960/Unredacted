@@ -1,5 +1,6 @@
 from typing import Any
 
+
 class DigitalObject:
     def __init__(
         self,
@@ -8,7 +9,7 @@ class DigitalObject:
         file_type: str,
         description: str = "No description is provided for the document",
         summary: str = "Summary still processing. Please check back later!",
-        raw_json: Any = None
+        raw_json: Any = None,
     ):
         if raw_json is not None:
             self.filename = raw_json["filename"]

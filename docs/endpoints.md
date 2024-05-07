@@ -1,25 +1,20 @@
 # Endpoints
 
 # Search and Recent
-## /atlas/search/string:search_parameters
+
+## /atlas/search/string:search_parameters?int:result_limit&string:start_year&string:end_year
 ### GET
 Search parameters is a string of words separated by + symbols. So to search "john f kennedy", the URL would be `http://unredactedonline.com/atlas/search/john+f+kennedy`
-
-## /atlas/search/string:search_parameters/int:result_limit
-### GET
-Functions the same as the previous endpoint except you can add a `result_limit` parameter that limits the number of results that are returned (surprise!). So to limit the john f kennedy search to 10 results, the url would be `http://unredactedonline.com/atlas/search/john+f+kennedy/10`
 
 ## /atlas/recent/int:result_limit
 ### GET
 Functions similiar to the the previous endpoint `http://unredactedonline.com/atlas/recent/5` but simply pulls the most recently processed documents
-
 
 ## Example Response
 ```
 {
   "data": [
     {
-      "date": "2022-11-16 20:48:58.845780",
       "digitalObjects": [
         {
           "description": "Reproduction scan of 8x10 transparency",
@@ -70,7 +65,6 @@ The `naId` is an ID that is unique to one object of each record type. If trying 
 ```
 {
   "data": {
-    "date": "2022-11-16 20:48:58.845780",
     "digitalObjects": [
       {
         "description": "Reproduction scan of 8x10 transparency",

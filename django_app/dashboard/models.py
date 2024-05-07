@@ -3,8 +3,6 @@
 from typing import Any
 from typing import Any, Optional, Union, List, Dict
 import datetime
-from json import JSONEncoder
-import json
 
 
 class DigitalObject:
@@ -87,7 +85,7 @@ class Document:
     # converts obj to dict
     def to_dict(
         self,
-    ) -> Dict[str, Union[str, int, datetime.datetime, Optional[List[Dict[str, str]]]]]:
+    ) -> Dict[str, Union[str, int, Optional[List[Dict[str, str]]]]]:
         return {
             "title": self.title,
             "naId": self.naId,
@@ -96,16 +94,12 @@ class Document:
             "date": self.date,
             "digitalObjects": [obj.to_dict() for obj in self.digitalObjects],
         }
-    
+
 
 class ApiEndpoint:
-    
     def __init__(self, endpoint: str, info: str):
         self.endpoint = endpoint
         self.info = info
 
     def to_dict(self) -> Dict[str, str]:
-        return {
-            "endpoint": self.endpoint,
-            "info": self.info
-        }
+        return {"endpoint": self.endpoint, "info": self.info}
