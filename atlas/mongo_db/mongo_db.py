@@ -20,6 +20,8 @@ db = client[DB_NAME]
 # Access the collection
 collection = db[COLLECTION_NAME]
 
+collection.create_index([("title", "text"), ("keywords.text", "text")])
+
 
 def query_db(query: dict[str, Any], limit=20) -> list[Document]:
     doc_list = []

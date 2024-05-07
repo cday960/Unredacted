@@ -3,6 +3,7 @@ import json
 from .models import Document
 import os
 from dotenv import load_dotenv
+from atlas.mongo_db import collection
 
 load_dotenv()
 
@@ -32,14 +33,14 @@ def get_recent_docs(num_docs: int = 5) -> list[Document]:
 
 def get_search_results(query: str, start_year: str, end_year: str) -> list[Document]:
 
-    search_results = None
+    # search_results = None
 
-    if query[-1] == "+":
-        query = query[:-1]
-    valid_query = False
-    for char in query:
-        if char != "+":
-            valid_query = True
+    # if query[-1] == '+':
+    #     query = query[:-1]
+    # valid_query = False
+    # for char in query:
+    #     if char != '+':
+    #         valid_query = True
 
     if len(start_year) > 2:
         query = query + "?start_year=" + start_year
@@ -52,7 +53,17 @@ def get_search_results(query: str, start_year: str, end_year: str) -> list[Docum
             get_from_atlas(f"{ATLAS_URL}/search", arg=query).text
         )["data"]
 
-    return search_results
+    # return search_results
+
+    query = query.rstrip('+').replace('+', ' ')
+    mongo_results = list(collection.find({"$text": {"$search": query}}))
+    
+    if mongo_results:
+        # Convert DB results to Document list
+        return [Document(raw_json=result) for result in mongo_results]
+
+    # None if no results
+    return None
 
 
 def get_document(naId: int) -> Document:
