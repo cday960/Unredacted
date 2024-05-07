@@ -100,7 +100,7 @@ def search_docs(
 @atlas.route("/recent/<int:result_limit>", methods=["GET"])
 def recent_docs(result_limit: int = 10):
     recent_docs: list[Document] = mongo_db.get_recent_docs(result_limit)
-    return jsonify({"data": recent_docs})
+    return jsonify({"data": [doc.to_dict() for doc in recent_docs]})
 
 
 @atlas.route("/pdf/<path:url>", methods=["GET"])

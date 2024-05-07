@@ -42,7 +42,7 @@ def get_recent_docs(num_docs: int = 10) -> list[Document]:
     recent_docs = []
     results = collection.find().sort("_id", -1).limit(num_docs)
     for result in results:
-        recent_docs.append(fill_doc_from_db_json(result).to_dict())
+        recent_docs.append(fill_doc_from_db_json(result))
     return recent_docs
 
 
@@ -73,13 +73,13 @@ def keyword_search(
     keywords: list[str], start_date: int = None, end_date: int = None
 ) -> list[Document]:
     keyword_results = []
-    # pipeline = [
-    #     {"$match": {"keywords.text": {"$in": keywords}}},
-    #     {"$group": {"_id": "$_id", "relevance_score": {"$sum": "$keywords.count"}}},
-    #     {"$sort": {"relevance_score": -1}},
-    # ]
-    # results = collection.aggregate(pipeline)
-    # print(results)
-    # for result in results:
-    #     keyword_results.append(fill_doc_from_db_json(result).to_dict())
+    pipeline = [
+        {"$match": {"keywords.text": {"$in": keywords}}},
+        {"$group": {"_id": "$_id", "relevance_score": {"$sum": "$keywords.count"}}},
+        {"$sort": {"relevance_score": -1}},
+    ]
+    results = collection.aggregate(pipeline)
+    print(results)
+    for result in results:
+        keyword_results.append(fill_doc_from_db_json(result).to_dict())
     return keyword_results

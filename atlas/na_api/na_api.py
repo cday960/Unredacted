@@ -38,7 +38,7 @@ def query_pdf_documents(
 
     try:
         # construct URL
-        url = f'{NA_API_URL}/records/search?q={q}&objectType=PDF&limit={limit}&levelOfDescription=item'
+        url = f"{NA_API_URL}/records/search?q={q}&objectType=PDF&limit={limit}&levelOfDescription=item"
         if page >= 0:
             url += f"&page={page}"
         if start_date is not None and valid_date_param(start_date):
