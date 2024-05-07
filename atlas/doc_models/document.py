@@ -6,13 +6,6 @@ from .digital_object import DigitalObject
 from .keywords import Keywords
 
 
-# class Encoder(JSONEncoder):
-#     def default(self, o):
-#         if isinstance(o, Document):
-#             return o.to_dict()
-#         return JSONEncoder.default(self, o)
-
-
 class Document:
     def __init__(
         self,

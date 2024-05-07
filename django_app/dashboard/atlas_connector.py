@@ -34,11 +34,11 @@ def get_search_results(query: str, start_year: str, end_year: str) -> list[Docum
 
     search_results = None
 
-    if query[-1] == '+':
+    if query[-1] == "+":
         query = query[:-1]
     valid_query = False
     for char in query:
-        if char != '+':
+        if char != "+":
             valid_query = True
 
     if len(start_year) > 2:
@@ -51,8 +51,7 @@ def get_search_results(query: str, start_year: str, end_year: str) -> list[Docum
         search_results = json.loads(
             get_from_atlas(f"{ATLAS_URL}/search", arg=query).text
         )["data"]
-
-    return [Document(raw_json=doc) for doc in search_results]
+    return search_results
 
 
 def get_document(naId: int) -> Document:

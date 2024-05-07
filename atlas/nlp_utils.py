@@ -22,7 +22,6 @@ from ibm_watson.natural_language_understanding_v1 import (
 )
 
 
-
 load_dotenv()
 
 # Watson NLP API Keys
@@ -100,17 +99,27 @@ def nlp_analysis(text: str):
         # print(json.dumps(response, indent=2))
     return response
 
+
 def gpt_analysis(text: str):
     response = None
-    completion = gpt_client.chat.completions.create(
-        model="gpt-3.5-turbo",
-        messages=[
-            {"role": "system", "content": "You are a document analysis assistant, skilled in summarizing complex government documents in a succinct and accurate manner."},
-            {"role": "user", "content": f'Summarize the following text in 2 paragraphs or less, at the top of the summary include a one phrase title for the provided text: {text}'}
-        ]
-    )
-    print(completion.choices[0].message)
-    response = completion.choices[0].message
+    try:
+        completion = gpt_client.chat.completions.create(
+            model="gpt-3.5-turbo",
+            messages=[
+                {
+                    "role": "system",
+                    "content": "You are a document analysis assistant, skilled in summarizing complex government documents in a succinct and accurate manner.",
+                },
+                {
+                    "role": "user",
+                    "content": f"Summarize the following text in 2 paragraphs or less, at the top of the summary include a one phrase title for the provided text: {text}",
+                },
+            ],
+        )
+        print(completion.choices[0].message)
+        response = completion.choices[0].message
+    except Exception as e:
+        print(f"ChatGPT failed to process document. Error: {e}")
     return response
 
 
@@ -121,12 +130,15 @@ def process_doc(doc: Document) -> Document:
         nlp_stuff = nlp_analysis(extracted_text)
         gpt_stuff = gpt_analysis(extracted_text)
 
-        if nlp_stuff is not None and gpt_stuff is not None:
+        doc.keywords = []
+        digitalObject.summary = "Unable to summarize document."
+
+        if nlp_stuff is not None:
             doc.keywords = [Keywords(raw_json=key) for key in nlp_stuff["keywords"]]
+            digitalObject.summary = nlp_stuff["summarization"]["text"]
+
+        if gpt_stuff is not None:
             digitalObject.summary = gpt_stuff
-        else:
-            doc.keywords = []
-            digitalObject.summary = "Unable to summarize document."
 
     mongo_db.insert_doc(doc)
     return doc

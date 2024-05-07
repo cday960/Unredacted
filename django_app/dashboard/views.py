@@ -29,6 +29,7 @@ def get_home_index(request: HtmxHttpRequest) -> HttpResponse:
     recent_docs: list[Document] = get_recent_docs(5)
     template = "home_page.html"
     context = {"test": "Home page switch", "data": {"recent_docs": recent_docs}}
+    request.session["previous_search"] = None
 
     return render(request, template, context=context)
 
@@ -58,7 +59,12 @@ def get_about_index(request: HtmxHttpRequest) -> HttpResponse:
 
 @require_GET
 def get_back_index(request: HtmxHttpRequest) -> HttpResponse:
-    return HttpResponseRedirect(request.META.get("HTTP_REFERER"))
+    if request.session["previous_search"] is not None:
+        return render(
+            request, "search_results.html", request.session["previous_search"]
+        )
+    else:
+        return HttpResponseRedirect(request.META.get("HTTP_REFERER"))
 
 
 # searching for a document
@@ -80,17 +86,17 @@ def search_results_index(request: HtmxHttpRequest) -> HttpResponse:
             query=search_query, start_year=search_start_date, end_year=search_end_date
         )
 
-        return render(
-            request,
-            "search_results.html",
-            context={
-                "test": "document search results",
-                "data": {
-                    "search_results": search_results,
-                    "search_query": og_query,
-                },
+        context = {
+            "test": "document search results",
+            "data": {
+                "search_results": search_results,
+                "search_query": og_query,
             },
-        )
+        }
+
+        request.session["previous_search"] = context
+
+        return render(request, "search_results.html", context)
     else:
         return get_search_index(request)
 
@@ -99,7 +105,6 @@ def search_results_index(request: HtmxHttpRequest) -> HttpResponse:
 def display_doc_index(request: HtmxHttpRequest, naId: int) -> HttpResponse:
     print(request.htmx.trigger)
     document: Document = get_document(naId)
-    print(document.to_dict())
     return render(
         request,
         "document_page.html",
