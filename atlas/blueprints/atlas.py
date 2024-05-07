@@ -3,11 +3,12 @@ from flask import Flask, Blueprint, jsonify, request, Response
 from doc_models import Document
 from mongo_db import mongo_db
 from na_api import na_api
-from nlp_utils import process_doc, queue_doc_for_processing
+from nlp_utils import process_doc, queue_doc_for_processing, start_doc_processing
 
 
 atlas = Blueprint("atlas", __name__, url_prefix="/atlas")
 
+start_doc_processing()
 
 # @atlas.route("/process", methods=["POST"])
 # def process_doc_raw():
@@ -89,10 +90,10 @@ def search_docs(
         )
 
         # start processing on each one -> grow database
-        for doc in docs_from_na:
-            queue_doc_for_processing(doc)
-
-        doc_list.extend(docs_from_na)
+        for na_doc in docs_from_na:
+            if not any(na_doc.naId == doc.naid for doc in docs_from_db):
+                queue_doc_for_processing(na_doc)
+                doc_list.append(na_doc)
 
     return jsonify({"data": [doc.to_dict() for doc in doc_list]}), 200
 

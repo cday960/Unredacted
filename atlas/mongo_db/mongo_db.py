@@ -63,7 +63,7 @@ def naId_exists(naId: int) -> bool:
 
 
 def insert_doc(doc: Document) -> bool:
-    if collection.insert_one(doc.to_dict()) is not None:
+    if not collection.find_one({'naid': doc.naId}) and collection.insert_one(doc.to_dict()) is not None:
         return True
     else:
         return False
@@ -72,14 +72,19 @@ def insert_doc(doc: Document) -> bool:
 def keyword_search(
     keywords: list[str], start_date: int = None, end_date: int = None
 ) -> list[Document]:
-    keyword_results = []
+    keyword_results: list[Document] = []
     pipeline = [
         {"$match": {"keywords.text": {"$in": keywords}}},
         {"$group": {"_id": "$_id", "relevance_score": {"$sum": "$keywords.count"}}},
         {"$sort": {"relevance_score": -1}},
     ]
     results = collection.aggregate(pipeline)
-    print(results)
     for result in results:
-        keyword_results.append(fill_doc_from_db_json(result).to_dict())
+        keyword_results.append(fill_doc_from_db_json(result))
+
+    # for keyword in keywords:
+    #     title_docs = collection.find({'$text': {'$search': keyword}})
+    #     for result in title_docs:
+    #         keyword_results.append(fill_doc_from_db_json(result))
+
     return keyword_results
